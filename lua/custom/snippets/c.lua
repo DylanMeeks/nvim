@@ -64,9 +64,9 @@ local function jdocsnip(args, _, old_state)
 	end
 
 	local insert = 2
-	for indx, arg in ipairs(vim.split(args[2][1], ", ", true)) do
+	for indx, arg in ipairs(vim.split(args[2][1], ", ", {plain=true})) do
 		-- Get actual name parameter.
-		arg = vim.split(arg, " ", true)[2]
+		arg = vim.split(arg, " ", {plain=true})[2]
 		if arg then
 			local inode
 			-- if there was some text in this parameter, use it as static_text for this new snippet.
