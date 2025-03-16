@@ -1,4 +1,5 @@
 return {
+    --[[
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
@@ -91,4 +92,5 @@ return {
 			end
 		end,
 	},
+    --]]
 }
