@@ -3,7 +3,12 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"folke/lazydev.nvim",
+			-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+			-- used for completion, annotations and signatures of Neovim apis
+			{
+				"folke/lazydev.nvim",
+				ft = "lua",
+			},
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -35,14 +40,29 @@ return {
 
 			local servers = {
 
-                hdl_checker = true,
+				-- This seems to be unmaintained and fails pip install
+				-- hdl_checker = true,
+
+				-- Markdown
 				marksman = true,
-				-- taplo = true,
+				-- doctoc = true,
+
+				-- Bash
 				bashls = true,
-				mutt_ls = true,
+				-- beautysh = true,
+				-- cbfmt = true,
+
+				-- Neomutt language server
+				-- mutt_ls = true,
+
+				-- Makefiles
 				-- checkmake = true,
 				autotools_ls = true,
-				beautysh = true,
+
+				-- zig language server
+				zls = true,
+
+				-- Go
 				gopls = {
 					settings = {
 						gopls = {
@@ -58,18 +78,24 @@ return {
 						},
 					},
 				},
+
+				-- Lua
 				lua_ls = {
 					server_capabilities = {
 						semanticTokensProvider = vim.NIL,
 					},
 				},
-				rust_analyzer = true,
 
+				-- rust_analyzer = true,
+
+				-- Python and mojo
 				pyright = true,
-				pylyzer = true,
+				ruff = true,
 				-- mojo = { manual_install = true },
 
 				--[[
+                -- TOML and YAML
+				taplo = true,
 				yamlls = {
 					settings = {
 						yaml = {
@@ -83,8 +109,7 @@ return {
 				},
                 --]]
 
-				-- ols = {},
-
+				--[[
 				ocamllsp = {
 					manual_install = true,
 					cmd = { "dune", "exec", "ocamllsp" },
@@ -118,6 +143,7 @@ return {
 
 					-- TODO: Check if i still need the filtypes stuff i had before
 				},
+                --]]
 
 				clangd = {
 					-- cmd = { "clangd", unpack(require("custom.clangd").flags) },
@@ -142,8 +168,9 @@ return {
 
 			local ensure_installed = {
 				"stylua",
+				"beautysh",
 				"lua_ls",
-				"delve",
+				-- "delve",
 			}
 
 			vim.list_extend(ensure_installed, servers_to_install)
@@ -241,10 +268,17 @@ return {
 					vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
 
-					vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = 0 })
-					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
-					vim.keymap.set("n", "<leader>wd", builtin.lsp_document_symbols, { buffer = 0 })
+					vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { buffer = 0 })
+					vim.keymap.set("n", "<leader>lca", vim.lsp.buf.code_action, { buffer = 0 })
+					vim.keymap.set("n", "<leader>lds", builtin.lsp_document_symbols, { buffer = 0 })
 					vim.keymap.set("n", "<leader>bf", function()
+						-- local filename = vim.fn.expand "%:p"
+
+						local extension = vim.fn.expand("%:e")
+						if extension == "mlx" then
+							return
+						end
+
 						require("conform").format({ async = true }, function(err)
 							if not err then
 								local mode = vim.api.nvim_get_mode().mode
@@ -281,7 +315,7 @@ return {
 			require("lsp_lines").setup()
 			vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
 
-			vim.keymap.set("", "<leader>l", function()
+			vim.keymap.set("", "<leader>ll", function()
 				local config = vim.diagnostic.config() or {}
 				if config.virtual_text then
 					vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
