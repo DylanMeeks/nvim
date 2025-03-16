@@ -60,7 +60,7 @@ return {
 				autotools_ls = true,
 
 				-- zig language server
-				zls = true,
+				-- zls = true,
 
 				-- Go
 				gopls = {
@@ -174,6 +174,7 @@ return {
 			}
 
 			vim.list_extend(ensure_installed, servers_to_install)
+			vim.list_extend(ensure_installed, {"zls@0.13.0"})
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
