@@ -1,19 +1,19 @@
 return {
-	{
-		"ramojus/mellifluous.nvim",
-		-- version = "v0.*", -- uncomment for stable config (some features might be missed if/when v1 comes out)
-		config = function()
-			require("mellifluous").setup({
-				styles = { -- see :h attr-list for options. set {} for NONE, { option = true } for option
-					main_keywords = { italic = true },
-					comments = { italic = true },
-				},
-                transparent_background = { enabled = true }
-			}) -- optional, see configuration section.
-			vim.cmd("colorscheme mellifluous")
-			vim.cmd("Mellifluous kanagawa_dragon")
-		end,
-	},
+	-- {
+	-- 	"ramojus/mellifluous.nvim",
+	-- 	-- version = "v0.*", -- uncomment for stable config (some features might be missed if/when v1 comes out)
+	-- 	config = function()
+	-- 		require("mellifluous").setup({
+	-- 			styles = { -- see :h attr-list for options. set {} for NONE, { option = true } for option
+	-- 				main_keywords = { italic = true },
+	-- 				comments = { italic = true },
+	-- 			},
+	--             transparent_background = { enabled = true }
+	-- 		}) -- optional, see configuration section.
+	-- 		vim.cmd("colorscheme mellifluous")
+	-- 		vim.cmd("Mellifluous kanagawa_dragon")
+	-- 	end,
+	-- },
 	{
 		"zenbones-theme/zenbones.nvim",
 		-- Optionally install Lush. Allows for more configuration or extending the colorscheme
@@ -28,20 +28,18 @@ return {
 			-- vim.cmd.colorscheme('zenbones')
 		end,
 	},
-	{
-		"uZer/pywal16.nvim",
-		-- config = function()
-		-- 	vim.cmd.colorscheme("pywal16")
-		-- end,
-	},
-	--[[
+	-- {
+	-- 	"uZer/pywal16.nvim",
+	-- 	   config = function()
+	-- 	   	vim.cmd.colorscheme("pywal16")
+	-- 	   end,
+	-- },
 	{
 		"rebelot/kanagawa.nvim",
 		name = "kanagawa-dragon",
 		config = function()
 			require("kanagawa").setup({
-				undercurl = true, -- enable undercurls
-				commentStyle = { italic = false },
+				compile = true,
 				keywordStyle = { italic = false },
 				transparent = true, -- set background color
 				overrides = function(colors) -- add/modify highlights
@@ -81,43 +79,7 @@ return {
 				},
 			})
 
-			ColorMyPencils()
+			vim.cmd("colorscheme kanagawa")
 		end,
 	},
-    --]]
-	--[[
-    {
-        "EdenEast/nightfox.nvim",
-        name  = "nightfox",
-        config = function()
-            require('nightfox').setup({
-                options = {
-                    transparent = true,
-                },
-            })
-        end,
-    },
-    {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        config = fuction()
-            require("catppuccin").setup({
-                flavour = "mocha", -- latte, frappe, macchiato, mocha
-                background = {     -- :h background
-                    light = "latte",
-                    dark = "mocha",
-                },
-                transparent_background = true,
-                term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
-            })
-        end,
-    },
-    {
-        "ellisonleao/gruvbox.nvim",
-        name = "gruvbox",
-        config = fuction()
-            require("gruvbox").setup({})
-        end,
-    },
-    --]]
 }
