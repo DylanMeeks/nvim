@@ -14,7 +14,7 @@ return {
 			"kkharji/sqlite.lua",
 		},
 		config = function()
-			require("custom.telescope")
+			require("plugins.telescope")
 		end,
 	},
 }

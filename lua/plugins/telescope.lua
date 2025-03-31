@@ -38,7 +38,7 @@ local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>tf", builtin.find_files)
 vim.keymap.set("n", "<leader>tg", builtin.git_files)
 vim.keymap.set("n", "<leader>th", builtin.help_tags)
-vim.keymap.set("n", "<leader>tr", require("custom.telescope.multi-ripgrep"))
+vim.keymap.set("n", "<leader>tr", require("plugins.telescope.multi-ripgrep"))
 vim.keymap.set("n", "<leader>tb", builtin.buffers)
 vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find)
 

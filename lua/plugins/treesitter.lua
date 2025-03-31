@@ -40,6 +40,6 @@ M.setup = function()
 	})
 end
 
--- M.setup()
+M.setup()
 
 return M
