@@ -37,12 +37,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				end
 			end)
 		end, { desc = "Format code" })
-
 	end,
 })
 
 vim.diagnostic.config({
-  virtual_text = { current_line = true }
+	virtual_text = { current_line = true },
 })
 
 -- This is copied straight from blink
@@ -66,13 +65,13 @@ vim.lsp.config("*", {
 
 -- Enable each language server by filename under the lsp/ folder
 vim.lsp.enable({
-    "bashls",
-    "luals",
-    "clangd",
-    "ocamllsp",
-    "pyright",
-    "ruff",
-    "zls",
-    "autotools_ls",
-    "gopls",
+	"bashls",
+	"luals",
+	"clangd",
+	"ocamllsp",
+	"pyright",
+	"ruff",
+	"zls",
+	"autotools_ls",
+	"gopls",
 })
