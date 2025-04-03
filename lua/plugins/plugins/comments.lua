@@ -1,5 +1,10 @@
 return {
 	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = { },
+	},
+	{
 		"danymat/neogen",
 		-- Uncomment next line if you want to follow only stable versions
 		version = "*",
