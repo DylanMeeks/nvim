@@ -19,6 +19,14 @@ return {
 				return (filename:gsub("%.mli", ".ml"))
 			end)
 
+            vim.fn["edit_alternate#rule#add"]("c", function (filename)
+               return (filename:gsub("%.c", ".h"))
+            end)
+
+            vim.fn["edit_alternate#rule#add"]("cpp", function (filename)
+               return (filename:gsub("%.cpp", ".hpp"))
+            end)
+
 			vim.api.nvim_set_keymap("n", "<space>ea", "<cmd>EditAlternate<CR>", { silent = true })
 		end,
 	},
