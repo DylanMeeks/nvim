@@ -74,4 +74,5 @@ vim.lsp.enable({
 	"zls",
 	"autotools_ls",
 	"gopls",
+    "marksman",
 })

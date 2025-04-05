@@ -8,18 +8,12 @@ require("telescope").setup({
 	},
 	extensions = {
 		wrap_results = true,
-
 		fzf = {},
 		history = {
 			path = vim.fs.joinpath(data, "databases/telescope_history.sqlite3"),
-			--path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
 			limit = 100,
 		},
 		media_files = {
-			-- filetypes whitelist
-			-- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-			-- filetypes = { "png", "webp", "jpg", "jpeg" },
-			-- find command (defaults to `fd`)
 			find_cmd = "rg",
 		},
 		["ui-select"] = {
@@ -31,7 +25,6 @@ require("telescope").setup({
 pcall(require("telescope").load_extension, "fzf")
 pcall(require("telescope").load_extension, "smart_history")
 pcall(require("telescope").load_extension, "ui-select")
-pcall(require("telescope").load_extension, "media_files")
 
 local builtin = require("telescope.builtin")
 
@@ -55,8 +48,4 @@ end)
 
 vim.keymap.set("n", "<leader>eo", function()
 	builtin.find_files({ cwd = "~/.config/nvim-backup/" })
-end)
-
-vim.keymap.set("n", "<leader>fp", function()
-	builtin.find_files({ cwd = "~/plugins/" })
 end)

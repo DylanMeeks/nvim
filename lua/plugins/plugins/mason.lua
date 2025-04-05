@@ -4,84 +4,32 @@ return {
 		dependencies = {
 			-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
 			-- used for completion, annotations and signatures of Neovim apis
-			{
-				"folke/lazydev.nvim",
-				ft = "lua",
-			},
-			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 			{ "j-hui/fidget.nvim", opts = {} },
 
 			-- Autoformatting
-            "stevearc/conform.nvim",
-
-			-- Schema information
-			"b0o/SchemaStore.nvim",
+			"stevearc/conform.nvim",
 		},
 		config = function()
-			require("lazydev").setup({
-				library = {
-					-- See the configuration section for more details
-					-- Load luvit types when the `vim.uv` word is found
-					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-				},
-			})
-
-			local servers = {
-
-				--[[
-				ocamllsp = {
-					manual_install = true,
-					cmd = { "dune", "exec", "ocamllsp" },
-					settings = {
-						codelens = { enable = true },
-						inlayHints = { enable = true },
-						syntaxDocumentation = { enable = true },
-					},
-
-					get_language_id = function(_, lang)
-						print("LANG:", lang)
-						local map = {
-							["ocaml.mlx"] = "ocaml",
-						}
-						return map[lang] or lang
-					end,
-
-					filetypes = {
-						"ocaml",
-						"ocaml.interface",
-						"ocaml.menhir",
-						"ocaml.cram",
-						"ocaml.mlx",
-						"ocaml.ocamllex",
-						"reason",
-					},
-
-					server_capabilities = {
-						semanticTokensProvider = false,
-					},
-
-				},
-                --]]
-			}
-
 			require("mason").setup()
 
 			local ensure_installed = {
-				"bashls",
-                "beautysh",
-                "lua_ls",
+				"bash-language-server",
+				"beautysh",
+				"lua-language-server",
 				"stylua",
-                "clangd",
-                "ocaml-lsp",
-                "pyright",
-                "ruff",
-                "zls",
-				"autotools_ls",
-                "gopls",
-                "marksman",
-                "cbfmt",
+				"clangd",
+				"ocaml-lsp",
+				"ocamlformat",
+				"pyright",
+				"ruff",
+				"black",
+				"zls",
+				"autotools-language-server",
+				"gopls",
+				"marksman",
+				"cbfmt",
 			}
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -106,13 +54,15 @@ return {
 				formatters_by_ft = {
 					lua = { "stylua" },
 					sh = { "beautysh" },
+					zig = { "zigfmt" },
+					ocaml = { "ocamlformat" },
 					markdown = function(bufnr)
 						return { first(bufnr, "marksman", "cbfmt") }
 					end,
-                    python = { "ruff" },
+					python = { "ruff", "black" },
+					go = { "goimports", "gofmt" },
 				},
 			})
-
 		end,
 	},
 }
