@@ -28,6 +28,7 @@ return {
 				"zls",
 				"autotools-language-server",
 				"gopls",
+                "goimports",
 				"marksman",
 				"cbfmt",
 			}
