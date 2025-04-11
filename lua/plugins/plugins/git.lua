@@ -79,10 +79,14 @@ return {
 			require("gitsigns").setup()
 		end,
 	},
-	--  {
-	--      "tpope/vim-fugitive",
-	--      config = function ()
-	--          vim.keymap.set("n", "<leader>gs", vim.cmd.Git);
-	--      end
-	--  },
+	{
+		"julienvincent/hunk.nvim",
+		cmd = { "DiffEditor" },
+		dependencies = {
+            "echasnovski/mini.icons",
+        },
+		config = function()
+			require("hunk").setup()
+		end,
+	},
 }

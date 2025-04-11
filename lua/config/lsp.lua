@@ -75,4 +75,5 @@ vim.lsp.enable({
 	"autotools_ls",
 	"gopls",
     "marksman",
+    "taplo",
 })

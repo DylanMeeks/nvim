@@ -31,6 +31,7 @@ return {
                 "goimports",
 				"marksman",
 				"cbfmt",
+                "taplo",
 			}
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })

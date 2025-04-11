@@ -1,3 +1,3 @@
 return {
-  { "laytan/cloak.nvim", opts = {} },
+	{ "laytan/cloak.nvim", opts = {} },
 }
