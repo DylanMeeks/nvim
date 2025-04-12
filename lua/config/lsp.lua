@@ -76,4 +76,5 @@ vim.lsp.enable({
 	"gopls",
     "marksman",
     "taplo",
+    "veridian"
 })
