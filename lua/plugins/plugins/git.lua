@@ -84,6 +84,7 @@ return {
 		cmd = { "DiffEditor" },
 		dependencies = {
             "echasnovski/mini.icons",
+            "MunifTanjim/nui.nvim",
         },
 		config = function()
 			require("hunk").setup()
