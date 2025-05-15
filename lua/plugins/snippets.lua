@@ -35,20 +35,59 @@ vim.snippet.stop = ls.unlink_current
 -- ================================================
 --      My Configuration
 -- ================================================
-ls.config.set_config({
+local extras = require("luasnip.extras")
+ls.setup({
 	history = true,
-	updateevents = "TextChanged,TextChangedI",
+	updateevents = { "TextChanged", "TextChangedI" },
 	override_builtin = true,
+	snip_env = {
+		ls = require("luasnip"),
+		s = ls.snippet,
+		sn = ls.snippet_node,
+		isn = ls.indent_snippet_node,
+		t = ls.text_node,
+		i = ls.insert_node,
+		f = ls.function_node,
+		c = ls.choice_node,
+		d = ls.dynamic_node,
+		r = ls.restore_node,
+		events = require("luasnip.util.events"),
+		ai = require("luasnip.nodes.absolute_indexer"),
+		extras = require("luasnip.extras"),
+		l = extras.lambda,
+		rep = extras.rep,
+		p = extras.partial,
+		m = extras.match,
+		n = extras.nonempty,
+		dl = extras.dynamic_lambda,
+		fmt = require("luasnip.extras.fmt").fmt,
+		fmta = require("luasnip.extras.fmt").fmta,
+		conds = require("luasnip.extras.expand_conditions"),
+		postfix = require("luasnip.extras.postfix").postfix,
+		types = require("luasnip.util.types"),
+		parse = require("luasnip.util.parser").parse_snippet,
+		ms = ls.multi_snippet,
+		k = require("luasnip.nodes.key_indexer").new_key,
+	},
 })
 
-for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("snippets/*.lua", true)) do
+for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("luasnippets/*.lua", true)) do
 	loadfile(ft_path)()
 end
 
-vim.keymap.set({ "i", "s" }, "<c-k>", function()
+-- require("luasnip.loaders.from_lua").lazy_load({ lazy_paths = vim.api.nvim_get_runtime_file("luasnippets/*.lua", true) })
+-- require("luasnip.loaders.from_lua").load({ paths = vim.api.nvim_get_runtime_file("luasnippets/*.lua", true)})
+
+vim.keymap.set({ "i", "s" }, "<C-h>", function()
+	return vim.snippet.active({ direction = -1 }) and vim.snippet.jump(-1)
+end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<C-l>", function()
 	return vim.snippet.active({ direction = 1 }) and vim.snippet.jump(1)
 end, { silent = true })
 
-vim.keymap.set({ "i", "s" }, "<c-j>", function()
-	return vim.snippet.active({ direction = -1 }) and vim.snippet.jump(-1)
+vim.keymap.set({ "i", "s" }, "<C-e>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
 end, { silent = true })

@@ -31,49 +31,11 @@ ls.add_snippets("markdown", {
 		{ trig = "qe", name = "code", dscr = "code" },
 		fmt(
 			[[
-    ```<>
-    <>
-    ```]],
+                ```<>
+                <>
+                ```
+                ]],
 			{ i(1, "text"), i(0) },
-			{ delimiters = "<>" }
-		)
-	),
-	autosnippet(
-		{ trig = "qw", name = "trig", dscr = "code" },
-		fmt(
-			[[
-    `<>`<>
-    ]],
-			{ i(1), i(0) },
-			{ delimiters = "<>" }
-		)
-	),
-	autosnippet(
-		{ trig = "!-", name = "checkbox bp", dscr = "checkbox bullet point" },
-		fmt(
-			[[
-    - [<>] <>
-    ]],
-			{ c(1, { t(" "), t("x") }), i(0) },
-			{ delimiters = "<>" }
-		)
-	),
-	autosnippet(
-		{ trig = "!l", name = "link", dscr = "link" },
-		fmta(
-			[[
-    [<>](<>)
-    ]],
-			{ d(1, get_visual), i(0) }
-		)
-	),
-	autosnippet(
-		{ trig = "dm", name = "math 2", dscr = "display math" },
-		fmt(
-			[[
-    $$<>$$<>
-    ]],
-			{ i(1), i(0) },
 			{ delimiters = "<>" }
 		)
 	),
@@ -81,13 +43,13 @@ ls.add_snippets("markdown", {
 		{ trig = "sdoc", name = "trig", dscr = "dscr" },
 		fmta(
 			[[
-    ## <>
+                ## <>
 
-    - <>
+                - <>
 
-    ### Reflection
-    <>
-    ]],
+                ### Reflection
+                <>
+                ]],
 			{ os.date("%d-%m-%Y"), i(1), i(0) }
 		)
 	),
@@ -99,4 +61,44 @@ ls.add_snippets("markdown", {
 	-- )),
 	postfix("vc", { l("`" .. l.POSTFIX_MATCH .. "`") }),
 	postfix("vr", { l("$" .. l.POSTFIX_MATCH .. "$") }),
+}, {
+	autosnippet(
+		{ trig = "qw", name = "trig", dscr = "code" },
+		fmt(
+			[[
+                `<>`<>
+                ]],
+			{ i(1), i(0) },
+			{ delimiters = "<>" }
+		)
+	),
+	autosnippet(
+		{ trig = "!-", name = "checkbox bp", dscr = "checkbox bullet point" },
+		fmt(
+			[[
+                - [<>] <>
+                ]],
+			{ c(1, { t(" "), t("x") }), i(0) },
+			{ delimiters = "<>" }
+		)
+	),
+	autosnippet(
+		{ trig = "!l", name = "link", dscr = "link" },
+		fmta(
+			[[
+                [<>](<>)
+                ]],
+			{ d(1, get_visual), i(0) }
+		)
+	),
+	autosnippet(
+		{ trig = "dm", name = "math 2", dscr = "display math" },
+		fmt(
+			[[
+                $$<>$$<>
+                ]],
+			{ i(1), i(0) },
+			{ delimiters = "<>" }
+		)
+	),
 })
