@@ -1,7 +1,7 @@
 return {
 	{
 		"saghen/blink.cmp",
-		-- optional: provides snippets for the snippet source
+		build = "cargo build --release",
 		dependencies = {
 			{
 				"folke/lazydev.nvim",
@@ -13,10 +13,19 @@ return {
 				},
 			},
 			{
+				"saghen/blink.compat",
+				optional = true, -- make optional so it's only enabled if any extras need it
+				opts = {},
+				version = "*",
+			},
+			-- git source
+			{
 				"Kaiser-Yang/blink-cmp-git",
 				dependencies = { "nvim-lua/plenary.nvim" },
 			},
+			-- other git source
 			{ "disrupted/blink-cmp-conventional-commits" },
+			-- snippets
 			{
 				"L3MON4D3/LuaSnip",
 				version = "v2.*",
@@ -36,6 +45,9 @@ return {
 				preset = "default",
 			},
 			appearance = {
+				-- sets the fallback highlight groups to nvim-cmp's highlight groups
+				-- useful for when your theme doesn't support blink.cmp
+				use_nvim_cmp_as_default = false,
 				nerd_font_variant = "mono",
 			},
 			completion = {
@@ -44,15 +56,18 @@ return {
 						treesitter = { "lsp" },
 					},
 				},
-				documentation = { auto_show = true, auto_show_delay_ms = 500 },
+				documentation = { auto_show = true, auto_show_delay_ms = 200 },
 				accept = {
 					auto_brackets = {
 						enabled = true,
 					},
 				},
+				ghost_text = {
+					enabled = true,
+				},
 			},
 			sources = {
-				default = { "conventional_commits", "git", "lsp", "path", "snippets", "buffer", "lazydev" },
+				default = { "lsp", "path", "snippets", "conventional_commits", "git", "lazydev", "buffer" },
 				providers = {
 					lazydev = {
 						name = "LazyDev",
