@@ -20,6 +20,7 @@ return {
 				"lua-language-server",
 				"stylua",
 				"clangd",
+				"clang-format",
 				"ocaml-lsp",
 				"ocamlformat",
 				"pyright",
@@ -28,10 +29,10 @@ return {
 				"zls",
 				"autotools-language-server",
 				"gopls",
-                "goimports",
+				"goimports",
 				"marksman",
 				"cbfmt",
-                "taplo",
+				"taplo",
 			}
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -63,6 +64,8 @@ return {
 					end,
 					python = { "ruff", "black" },
 					go = { "goimports", "gofmt" },
+					c = { "clang-format" },
+                    cpp = { "clang-format" },
 				},
 			})
 		end,

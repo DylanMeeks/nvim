@@ -9,6 +9,7 @@ return {
 		"ocaml.mlx",
 		"ocaml.ocamllex",
 		"reason",
+        "dune",
 	},
 	settings = {
 		codelens = { enable = true },
