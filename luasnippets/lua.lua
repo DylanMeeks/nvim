@@ -26,6 +26,10 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
+local copy = function(args)
+	return args[1]
+end
+
 -- snippets
 ls.add_snippets("lua", {
 
@@ -37,32 +41,32 @@ ls.add_snippets("lua", {
 		t(")"),
 	}),
 
-	-- s("fn basic", {
-	-- 	t("-- @param: "),
-	-- 	f(utils.copy, 2),
-	-- 	t({ "", "local " }),
-	-- 	i(1),
-	-- 	t(" = function("),
-	-- 	i(2, "fn param"),
-	-- 	t({ ")", "\t" }),
-	-- 	i(0), -- Last Placeholder, exit Point of the snippet. EVERY 'outer' SNIPPET NEEDS Placeholder 0.
-	-- 	t({ "", "end" }),
-	-- }),
+	s("fn basic", {
+		t("-- @param: "),
+		f(copy, 2),
+		t({ "", "local " }),
+		i(1),
+		t(" = function("),
+		i(2, "fn param"),
+		t({ ")", "\t" }),
+		i(0), -- Last Placeholder, exit Point of the snippet. EVERY 'outer' SNIPPET NEEDS Placeholder 0.
+		t({ "", "end" }),
+	}),
 
-	-- s("fn module", {
-	-- 	-- make new line into snippet
-	-- 	t("-- @param: "),
-	-- 	f(utils.copy, 3),
-	-- 	t({ "", "" }),
-	-- 	i(1, "modname"),
-	-- 	t("."),
-	-- 	i(2, "fnname"),
-	-- 	t(" = function("),
-	-- 	i(3, "fn param"),
-	-- 	t({ ")", "\t" }),
-	-- 	i(0), -- Last Placeholder, exit Point of the snippet. EVERY 'outer' SNIPPET NEEDS Placeholder 0.
-	-- 	t({ "", "end" }),
-	-- }),
+	s("fn module", {
+		-- make new line into snippet
+		t("-- @param: "),
+		f(copy, 3),
+		t({ "", "" }),
+		i(1, "modname"),
+		t("."),
+		i(2, "fnname"),
+		t(" = function("),
+		i(3, "fn param"),
+		t({ ")", "\t" }),
+		i(0), -- Last Placeholder, exit Point of the snippet. EVERY 'outer' SNIPPET NEEDS Placeholder 0.
+		t({ "", "end" }),
+	}),
 
 	-------------------------------------
 	---       lua function call       ---
@@ -84,7 +88,7 @@ ls.add_snippets("lua", {
 	-- if nil
 	-- elseif
 
-	s({ trig = "if basic", wordTrig = true }, {
+	s({ trig = "if", wordTrig = true }, {
 		t({ "if " }),
 		i(1),
 		t({ " then", "\t" }),
