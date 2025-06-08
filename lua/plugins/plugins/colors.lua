@@ -82,4 +82,36 @@ return {
 			vim.cmd("colorscheme kanagawa")
 		end,
 	},
+	{
+		"ellisonleao/gruvbox.nvim",
+		config = function()
+			require("gruvbox").setup({
+				italic = {
+					strings = false,
+				},
+				contrast = "hard", -- can be "hard", "soft" or empty string
+			})
+			-- vim.cmd("colorscheme gruvbox")
+		end,
+	},
+	{
+		"blazkowolf/gruber-darker.nvim",
+		opts = {
+			-- defaults
+			bold = true,
+			invert = {
+				signs = false,
+				tabline = false,
+				visual = false,
+			},
+			italic = {
+				strings = true,
+				comments = true,
+				operators = false,
+				folds = true,
+			},
+			undercurl = true,
+			underline = true,
+		},
+	},
 }
