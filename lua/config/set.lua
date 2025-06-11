@@ -8,6 +8,7 @@ vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a T
 vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 vim.o.smartindent = true -- syntax aware indentations for newline inserts
+vim.o.list = true -- Shows > and - for tabs and trailing spaces
 
 vim.opt.wrap = false
 
@@ -32,8 +33,6 @@ vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 -- Vertical cursor line
 vim.opt.cursorcolumn = true
-
-vim.opt.colorcolumn = "100"
 
 vim.g.mapleader = " "
 
