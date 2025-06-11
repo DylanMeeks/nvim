@@ -6,9 +6,9 @@ vim.keymap.set({ "v", "n" }, "<C-0>", "g0", {})
 
 local callback = function(args)
 	if args.bang == false then
-		vim.cmp("set spell wrap linebreak nolist")
+		vim.cmd("set spell wrap linebreak nolist")
 	else
-		vim.cmp("set nospell nowrap nolinebreak list")
+		vim.cmd("set nospell nowrap nolinebreak list")
 	end
 end
 
