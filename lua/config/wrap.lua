@@ -12,7 +12,7 @@ local callback = function(args)
 	end
 end
 
-vim.api.nvim_create_user_command("Wrap", callback, {
+vim.api.nvim_create_user_command("LineWrap", callback, {
 	nargs = 0,
 	desc = "Sets some options for editing text",
 	bang = true,
