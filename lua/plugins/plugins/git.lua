@@ -4,7 +4,6 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- required
 			"sindrets/diffview.nvim", -- optional - Diff integration
-
 			"nvim-telescope/telescope.nvim", -- optional
 		},
 		config = function()
@@ -17,11 +16,8 @@ return {
 	},
 	{
 		"isakbm/gitgraph.nvim",
+		dependencies = { "sindrets/diffview.nvim" },
 		opts = {
-			-- symbols = {
-			-- 	merge_commit = "M",
-			-- 	commit = "*",
-			-- },
 			symbols = {
 				merge_commit = "",
 				commit = "",
@@ -55,11 +51,17 @@ return {
 				fields = { "hash", "timestamp", "author", "branch_name", "tag" },
 			},
 			hooks = {
+				-- Check diff of a commit
 				on_select_commit = function(commit)
 					print("selected commit:", commit.hash)
+					vim.notify("DiffviewOpen " .. commit.hash .. "^!")
+					vim.cmd(":DiffviewOpen " .. commit.hash .. "^!")
 				end,
+				-- Check diff from commit a -> commit b
 				on_select_range_commit = function(from, to)
 					print("selected range:", from.hash, to.hash)
+					vim.notify("DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
+					vim.cmd(":DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
 				end,
 			},
 		},
@@ -83,9 +85,9 @@ return {
 		"julienvincent/hunk.nvim",
 		cmd = { "DiffEditor" },
 		dependencies = {
-            "echasnovski/mini.icons",
-            "MunifTanjim/nui.nvim",
-        },
+			"echasnovski/mini.icons",
+			"MunifTanjim/nui.nvim",
+		},
 		config = function()
 			require("hunk").setup()
 		end,
