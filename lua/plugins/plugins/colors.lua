@@ -34,6 +34,15 @@ return {
 	-- 	   	vim.cmd.colorscheme("pywal16")
 	-- 	   end,
 	-- },
+
+	{
+		"norcalli/nvim-colorizer.lua",
+		name = "nvim-colorizer",
+        enabled = false,
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
 	{
 		"rebelot/kanagawa.nvim",
 		name = "kanagawa-dragon",
@@ -79,7 +88,7 @@ return {
 				},
 			})
 
-			vim.cmd("colorscheme kanagawa")
+			-- vim.cmd("colorscheme kanagawa")
 		end,
 	},
 	{
@@ -91,7 +100,7 @@ return {
 				},
 				contrast = "hard", -- can be "hard", "soft" or empty string
 			})
-			-- vim.cmd("colorscheme gruvbox")
+			vim.cmd("colorscheme gruvbox")
 		end,
 	},
 	{
@@ -113,5 +122,10 @@ return {
 			undercurl = true,
 			underline = true,
 		},
+	},
+	{
+		"folke/tokyonight.nvim",
+        enabled = false,
+		opts = {},
 	},
 }
