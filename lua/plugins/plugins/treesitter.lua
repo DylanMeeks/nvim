@@ -2,9 +2,11 @@ return {
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		lazy = false,
 		build = ":TSUpdate",
 		config = function()
-			require("plugins.treesitter").setup()
+			require("nvim-treesitter").setup({})
 		end,
 	},
 }
