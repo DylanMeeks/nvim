@@ -1,11 +1,13 @@
 return {
 	{
 		"folke/todo-comments.nvim",
+		enabled = false,
 		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = { },
+		opts = {},
 	},
 	{
 		"danymat/neogen",
+		enabled = false,
 		-- Uncomment next line if you want to follow only stable versions
 		version = "*",
 		config = function()
