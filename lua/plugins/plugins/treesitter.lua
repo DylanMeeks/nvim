@@ -1,12 +1,9 @@
 return {
-	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
+		dependencies = {},
+		build = ":TSUpdate",
 		branch = "main",
 		lazy = false,
-		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter").setup({})
-		end,
 	},
 }
