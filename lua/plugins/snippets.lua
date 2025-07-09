@@ -69,6 +69,10 @@ ls.setup({
 		ms = ls.multi_snippet,
 		k = require("luasnip.nodes.key_indexer").new_key,
 	},
+	keys = function()
+		-- Disable default tab keybinding in LuaSnip
+		return {}
+	end,
 })
 
 for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("luasnippets/*.lua", true)) do
@@ -80,14 +84,14 @@ end
 
 vim.keymap.set({ "i", "s" }, "<C-h>", function()
 	return vim.snippet.active({ direction = -1 }) and vim.snippet.jump(-1)
-end, { silent = true })
+end, { silent = true, desc = "Go to previous snippet input" })
 
 vim.keymap.set({ "i", "s" }, "<C-l>", function()
 	return vim.snippet.active({ direction = 1 }) and vim.snippet.jump(1)
-end, { silent = true })
+end, { silent = true, desc = "Go to next snippet input" })
 
 vim.keymap.set({ "i", "s" }, "<C-e>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
 	end
-end, { silent = true })
+end, { silent = true, desc = "Toggle between snippet choices" })

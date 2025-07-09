@@ -10,17 +10,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local builtin = require("telescope.builtin")
 
 		vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
-		vim.keymap.set("n", "grr", vim.lsp.buf.references, { buffer = 0 })
-		vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
-		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = 0 }) -- CTRL-S in insert and select mode
-		vim.keymap.set("n", "gri", vim.lsp.buf.implementation, { buffer = 0 })
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
-		vim.keymap.set("n", "gO", vim.lsp.buf.document_symbol, { buffer = 0 })
-		vim.keymap.set("n", "grn", vim.lsp.buf.rename, { buffer = 0 })
-		vim.keymap.set({ "n", "v" }, "gra", vim.lsp.buf.code_action, { buffer = 0 })
-		vim.keymap.set("n", "<leader>lds", builtin.lsp_document_symbols, { buffer = 0 })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0, desc = "Lsp go to definition" })
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0, desc = "Lsp go to declaration" })
+		vim.keymap.set("n", "grr", vim.lsp.buf.references, { buffer = 0, desc = "Lsp go to references" })
+		vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0, desc = "Lsp go to type definition" })
+		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = 0, desc = "Lsp show signature help" }) -- CTRL-S in insert and select mode
+		vim.keymap.set("n", "gri", vim.lsp.buf.implementation, { buffer = 0, desc = "Lsp go to implementation" })
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0, desc = "Lsp show hover" })
+		vim.keymap.set("n", "gO", vim.lsp.buf.document_symbol, { buffer = 0, desc = "Lsp open document symbols" })
+		vim.keymap.set("n", "grn", vim.lsp.buf.rename, { buffer = 0, desc = "Lsp rename symbol" })
+		vim.keymap.set({ "n", "v" }, "gra", vim.lsp.buf.code_action, { buffer = 0, desc = "Lsp code action" })
+		vim.keymap.set(
+			"n",
+			"<leader>lds",
+			builtin.lsp_document_symbols,
+			{ buffer = 0, desc = "Telescope lsp document symbols" }
+		)
 		vim.keymap.set("n", "<leader>bf", function()
 			local extension = vim.fn.expand("%:e")
 			if extension == "mlx" then
@@ -38,12 +43,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gll", function()
 			if virtual_lines_enabled then
 				vim.diagnostic.config({ virtual_lines = false, virtual_text = { current_line = true } })
-                virtual_lines_enabled = false
+				virtual_lines_enabled = false
 			else
 				vim.diagnostic.config({ virtual_lines = true, virtual_text = false })
-                virtual_lines_enabled = true
+				virtual_lines_enabled = true
 			end
-		end, { buffer = 0 })
+		end, { buffer = 0, desc = "Toggle virtual lines" })
 	end,
 })
 
