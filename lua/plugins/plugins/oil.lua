@@ -72,7 +72,7 @@ return {
 							cwd = key,
 							text = true,
 						})
-						local tracked_proc = vim.system({ "jj", "file", "list", "--quiet"}, {
+						local tracked_proc = vim.system({ "jj", "file", "list", "--quiet" }, {
 							cwd = key,
 							text = true,
 						})
@@ -97,6 +97,12 @@ return {
 			end
 
 			require("oil").setup({
+				columns = {
+					-- "icon",
+					"permissions",
+					"size",
+					"mtime",
+				},
 				keymaps = {
 					["gd"] = {
 						desc = "Toggle file detail view",
@@ -131,7 +137,7 @@ return {
 					end,
 				},
 			})
-			vim.keymap.set("n", "<leader>pv", ":Oil<CR>")
+			vim.keymap.set("n", "<leader>pv", ":Oil<CR>", { desc = "Open Oil" })
 		end,
 	},
 	{
