@@ -77,17 +77,19 @@ vim.lsp.config("*", {
 
 -- Enable each language server by filename under the lsp/ folder
 vim.lsp.enable({
+	"autotools_ls",
 	"bashls",
-	"luals",
 	"clangd",
-	-- "ocamllsp",
+	-- "emmylua_ls",
+	"gopls",
+	"luals",
+	"marksman",
+	"ocamllsp",
 	"pyright",
 	"ruff",
+	"svls",
+	"taplo",
+	"tombi",
+	"veridian",
 	"zls",
-	"autotools_ls",
-	-- "gopls",
-	"marksman",
-	-- "taplo",
-	-- "veridian",
-	-- "vsls",
 })
