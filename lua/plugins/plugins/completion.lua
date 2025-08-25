@@ -63,7 +63,14 @@ return {
 				},
 			},
 			sources = {
-				default = { "lsp", "path", "snippets", "conventional_commits", "git", "lazydev", "buffer" },
+				default = {
+					"lsp",
+					"path",
+					"snippets",
+					"conventional_commits", --[["git",--]]
+					"lazydev",
+					"buffer",
+				},
 				providers = {
 					lazydev = {
 						name = "LazyDev",
@@ -71,13 +78,13 @@ return {
 						-- make lazydev completions top priority (see `:h blink.cmp`)
 						score_offset = 100,
 					},
-					git = {
-						module = "blink-cmp-git",
-						name = "Git",
-						opts = {
-							-- options for the blink-cmp-git
-						},
-					},
+					-- git = {
+					-- 	module = "blink-cmp-git",
+					-- 	name = "Git",
+					-- 	opts = {
+					-- 		-- options for the blink-cmp-git
+					-- 	},
+					-- },
 					conventional_commits = {
 						name = "Conventional Commits",
 						module = "blink-cmp-conventional-commits",
