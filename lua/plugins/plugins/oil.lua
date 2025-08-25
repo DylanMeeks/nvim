@@ -92,7 +92,7 @@ return {
 			local refresh = require("oil.actions").refresh
 			local orig_refresh = refresh.callback
 			refresh.callback = function(...)
-				git_status = new_git_status()
+				-- git_status = new_git_status()
 				orig_refresh(...)
 			end
 
@@ -101,7 +101,7 @@ return {
 					-- "icon",
 					"permissions",
 					"size",
-					"mtime",
+					-- "mtime",
 				},
 				keymaps = {
 					["gd"] = {
@@ -128,12 +128,12 @@ return {
 							return is_dotfile
 						end
 						-- dotfiles are considered hidden unless tracked
-						if is_dotfile then
-							return not git_status[dir].tracked[name]
-						else
-							-- Check if file is gitignored
-							return git_status[dir].ignored[name]
-						end
+						-- if is_dotfile then
+						-- 	return not git_status[dir].tracked[name]
+						-- else
+						-- Check if file is gitignored
+						return git_status[dir].ignored[name]
+						-- end
 					end,
 				},
 			})
