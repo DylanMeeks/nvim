@@ -1,6 +1,137 @@
-require("config.set")
-require("config.remap")
-require("config.lazy")
-require("config.lsp")
-require("config.autocmds")
-require("config.wrap")
+vim.cmd([[set mouse=]])
+
+vim.opt.guicursor = "a:blinkon0" -- no blink
+vim.opt.winborder = "single"
+
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.signcolumn = "yes"
+
+vim.opt.tabstop = 4        -- A TAB character looks like 4 spaces
+vim.opt.expandtab = true   -- Pressing the TAB key will insert spaces instead of a TAB character
+vim.opt.softtabstop = 4    -- Number of spaces inserted instead of a TAB character
+vim.opt.shiftwidth = 4     -- Number of spaces inserted when indenting
+vim.opt.smartindent = true -- syntax aware indentations for newline inserts
+vim.opt.list = true        -- Shows > and - for tabs and trailing spaces
+
+vim.opt.wrap = false
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.inccommand = "split"
+
+vim.opt.termguicolors = true
+
+vim.opt.scrolloff = 8
+vim.opt.isfname:append("@-@")
+
+vim.opt.updatetime = 50
+
+vim.opt.cursorline = true   -- Horizontal cursor line
+vim.opt.cursorcolumn = true -- Vertical cursor line
+
+vim.filetype.plugin = "on"
+
+vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>o", ":update<CR> :source<CR>")
+-- in visual mode, use J and K to move a selected up and down
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- brings line below current to current line
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "<C-d>", "<C-d>zz") -- center screen
+vim.keymap.set("n", "<C-u>", "<C-u>zz") -- center screen
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set({ "n", "v", "x" }, "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
+vim.keymap.set({ "n", "v", "x" }, "<leader>P", '"+p')
+vim.keymap.set({ "n", "v", "x" }, "<leader>d", '"_d')
+
+vim.keymap.set("i", "<C-c>", "<ESC>")
+
+vim.pack.add({
+    { src = "https://github.com/stevearc/oil.nvim" },
+    { src = "https://github.com/echasnovski/mini.pick" }, -- Dep for neogit
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+    { src = "https://github.com/chomosuke/typst-preview.nvim" },
+    -- { src = "https://github.com/neovim/nvim-lspconfig" }, -- I keep this arround only to copy them when I need them
+    { src = "https://github.com/mason-org/mason.nvim" },
+    { src = "https://github.com/L3MON4D3/LuaSnip" },
+    { src = "https://github.com/ThePrimeagen/harpoon",            version = "harpoon2", },
+    { src = "https://github.com/nvim-lua/plenary.nvim" }, -- Dep for harpoon, neogit
+    { src = "https://github.com/blazkowolf/gruber-darker.nvim", },
+    -- VCS
+    { src = "https://github.com/NeogitOrg/neogit.git" },
+    { src = "https://github.com/sindrets/diffview.nvim.git" }, -- Dep for neogit (optional)
+    { src = "https://github.com/lewis6991/gitsigns.nvim" },
+    { src = "https://github.com/julienvincent/hunk.nvim", },
+    { src = "https://github.com/MunifTanjim/nui.nvim" }, -- Dep for hunk
+
+})
+
+-- Git and jj
+vim.api.nvim_create_user_command("DiffEditor", function()
+    require("hunk").setup()
+end, {})
+require("gitsigns").setup()
+require("neogit").setup({})
+
+require("mason").setup()
+require("mini.pick").setup()
+require("oil").setup()
+require("gruber-darker").setup({
+    bold = true,
+    invert = {
+        signs = false,
+        tabline = false,
+        visual = false,
+    },
+    italic = {
+        strings = false,
+        comments = true,
+        operators = false,
+        folds = false,
+    },
+    undercurl = true,
+    underline = true,
+})
+
+vim.keymap.set("n", "<leader>gs", function() require("neogit").open() end, { silent = true, desc = "Neogit" })
+vim.keymap.set("n", "<leader>fd", "<CMD>Pick files<CR>", { silent = true, desc = "Find files" })
+vim.keymap.set("n", "<leader>fh", "<CMD>Pick help<CR>")
+vim.keymap.set("n", "<leader>fg", "<CMD>Pick grep<CR>")
+vim.keymap.set("n", "<leader>fb", "<CMD>Pick buffers<CR>")
+vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
+vim.keymap.set("t", "", "") -- map esc to always return to normal mode
+vim.keymap.set("t", "", "") -- don't move cursor when <C-o> is done
+vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
+
+vim.lsp.enable({
+    "autotools_ls",
+    "bashls",
+    "clangd",
+    "emmylua_ls",
+    "lua_ls",
+    "marksman",
+    -- "pyright",
+    -- "ruff",
+    -- "svls",
+    -- "veridian",
+    -- "zls",
+})
+
+local virtual_text_enabled = false
+vim.keymap.set("n", "<leader>ll", function()
+    virtual_text_enabled = not virtual_text_enabled
+    vim.diagnostic.config({ virtual_text = virtual_text_enabled })
+end, {})
+
+vim.cmd("colorscheme gruber-darker")
