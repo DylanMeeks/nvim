@@ -126,6 +126,7 @@ vim.lsp.enable({
     -- "svls",
     -- "veridian",
     -- "zls",
+    "tinymist",
 })
 
 local virtual_text_enabled = false
