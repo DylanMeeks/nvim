@@ -77,6 +77,17 @@ vim.pack.add({
 
 })
 
+local update_plugins = function()
+    local installed = vim.pack.get()
+    local names = {}
+    for _, v in ipairs(installed) do
+        table.insert(names, v.spec.name)
+    end
+    vim.pack.update(names)
+end
+vim.api.nvim_create_user_command("UpdatePlugins", update_plugins,
+    { desc = "Update plugins installed using built-in package manager" })
+
 -- Git and jj
 vim.api.nvim_create_user_command("DiffEditor", function()
     require("hunk").setup()
