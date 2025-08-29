@@ -57,6 +57,18 @@ vim.keymap.set({ "n", "v", "x" }, "<leader>d", '"_d')
 
 vim.keymap.set("i", "<C-c>", "<ESC>")
 
+vim.api.nvim_create_autocmd({ "PackChanged" }, {
+    callback = function(ev)
+        local data = ev.data
+        local plugin_name = data.spec.name
+        local plugin_path = data.path
+        if plugin_name == "LuaSnip" and data.kind == "install" then
+            os.execute(string.format("make -C %s install_jsregexp", plugin_path))
+            return
+        end
+    end
+})
+
 vim.pack.add({
     { src = "https://github.com/stevearc/oil.nvim" },
     { src = "https://github.com/echasnovski/mini.pick" }, -- Dep for neogit
@@ -81,7 +93,7 @@ vim.pack.add({
      beautysh
      clang-format
      typstyle
- --]]
+--]]
 
 local update_plugins = function()
     local installed = vim.pack.get()
@@ -186,3 +198,12 @@ end
 vim.o.statusline = "%{%v:lua._G.statusline()%}"
 
 require("config.autocmds")
+
+if vim.g.neovide then
+    vim.o.guifont = "CaskaydiaCove Nerd Font:h10"
+    vim.g.neovide_cursor_animation_length = 0
+    vim.g.neovide_cursor_animate_in_insert_mode = false
+    vim.g.neovide_cursor_animate_command_line = false
+    vim.g.neovide_scroll_animation_far_lines = 0
+    vim.g.neovide_scroll_animation_length = 0
+end
