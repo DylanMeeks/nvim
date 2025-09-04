@@ -113,6 +113,12 @@ end, {})
 require("gitsigns").setup()
 require("neogit").setup({})
 
+require("typst-preview").setup({
+    dependencies_bin = {
+        ['tinymist'] = 'tinymist', -- look in mason dir for executeable 
+    },
+})
+
 require("mason").setup()
 require("mini.pick").setup()
 require("oil").setup()
@@ -149,7 +155,7 @@ vim.lsp.enable({
     "clangd",
     "emmylua_ls",
     "lua_ls",
-    "marksman",
+    -- "marksman", -- musl support problems
     -- "pyright",
     -- "ruff",
     -- "svls",

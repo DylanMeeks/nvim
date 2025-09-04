@@ -50,6 +50,11 @@ return {
     cmd = { vim.fn.stdpath("data") .. "/mason/bin/" .. 'tinymist' },
     filetypes = { 'typst' },
     root_markers = { '.git' },
+    settings = {
+        formatterMode = "typstyle",
+        exportPdf = "onType",
+        semanticTokens = "disable"
+    },
     on_attach = function(client, bufnr)
         for _, command in ipairs {
             'tinymist.exportSvg',
