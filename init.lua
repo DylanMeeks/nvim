@@ -115,7 +115,7 @@ require("neogit").setup({})
 
 require("typst-preview").setup({
     dependencies_bin = {
-        ['tinymist'] = 'tinymist', -- look in mason dir for executeable 
+        ['tinymist'] = 'tinymist', -- look in mason dir for executeable
     },
 })
 
@@ -140,6 +140,7 @@ require("gruber-darker").setup({
 })
 
 vim.keymap.set("n", "<leader>gs", function() require("neogit").open() end, { silent = true, desc = "Neogit" })
+
 vim.keymap.set("n", "<leader>fd", "<CMD>Pick files<CR>", { silent = true, desc = "Find files" })
 vim.keymap.set("n", "<leader>fh", "<CMD>Pick help<CR>")
 vim.keymap.set("n", "<leader>fg", "<CMD>Pick grep<CR>")
@@ -155,7 +156,7 @@ vim.lsp.enable({
     "clangd",
     "emmylua_ls",
     "lua_ls",
-    -- "marksman", -- musl support problems
+    "marksman", -- musl support problems
     -- "pyright",
     -- "ruff",
     -- "svls",
