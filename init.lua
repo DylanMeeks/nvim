@@ -71,7 +71,8 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
 
 vim.pack.add({
     { src = "https://github.com/stevearc/oil.nvim" },
-    { src = "https://github.com/echasnovski/mini.pick" }, -- Dep for neogit
+    -- { src = "https://github.com/echasnovski/mini.pick" }, -- Dep for neogit
+    { src = "https://github.com/nvim-telescope/telescope.nvim" }, -- Dep for neogit
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
     { src = "https://github.com/chomosuke/typst-preview.nvim" },
     -- { src = "https://github.com/neovim/nvim-lspconfig" }, -- I keep this arround only to copy them when I need them
@@ -120,8 +121,17 @@ require("typst-preview").setup({
 })
 
 require("mason").setup()
-require("mini.pick").setup()
-require("oil").setup()
+require("oil").setup({
+    columns = {
+        -- "icon",
+        "permissions",
+        "size",
+        -- "mtime",
+    },
+    view_options = {
+        show_hidden = true,
+    },
+})
 require("gruber-darker").setup({
     bold = true,
     invert = {
@@ -141,10 +151,37 @@ require("gruber-darker").setup({
 
 vim.keymap.set("n", "<leader>gs", function() require("neogit").open() end, { silent = true, desc = "Neogit" })
 
-vim.keymap.set("n", "<leader>fd", "<CMD>Pick files<CR>", { silent = true, desc = "Find files" })
-vim.keymap.set("n", "<leader>fh", "<CMD>Pick help<CR>")
-vim.keymap.set("n", "<leader>fg", "<CMD>Pick grep<CR>")
-vim.keymap.set("n", "<leader>fb", "<CMD>Pick buffers<CR>")
+require('telescope').setup {
+    defaults = {
+        theme = "ivy",
+    },
+    pickers = {
+        find_files = {
+            theme = "ivy",
+        },
+        live_grep = {
+            theme = "ivy",
+        },
+        buffers = {
+            theme = "ivy",
+        },
+        help_tags = {
+            theme = "ivy",
+        },
+        man_pages = {
+            theme = "ivy",
+        },
+    },
+}
+
+local builtin = require('telescope.builtin')
+local ivy = require('telescope.themes').get_dropdown({});
+vim.keymap.set('n', '<leader>fd', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>fm', builtin.man_pages, { desc = 'Telescope man pages' })
+
 vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
 vim.keymap.set("t", "", "") -- map esc to always return to normal mode
 vim.keymap.set("t", "", "") -- don't move cursor when <C-o> is done
