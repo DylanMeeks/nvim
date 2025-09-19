@@ -1,4 +1,4 @@
-vim.cmd([[set mouse=]])
+vim.cmd([[set mouse=]])          -- mouse is for the weak
 
 vim.opt.guicursor = "a:blinkon0" -- no blink
 vim.opt.winborder = "single"
@@ -148,6 +148,22 @@ require("gruber-darker").setup({
     undercurl = true,
     underline = true,
 })
+
+local harpoon = require("harpoon")
+harpoon:setup()
+vim.keymap.set("n", "<leader>a", function()
+    harpoon:list():add()
+end, { desc = "Add to harpoon" })
+vim.keymap.set("n", "<leader>e", function()
+    harpoon.ui:toggle_quick_menu(harpoon:list())
+end, { desc = "Toogle harpoon" })
+for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
+    vim.keymap.set("n", string.format("<leader>%d", idx), function()
+        harpoon:list():select(idx)
+    end)
+end
+local harpoon_extensions = require("harpoon.extensions")
+harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 
 vim.keymap.set("n", "<leader>gs", function() require("neogit").open() end, { silent = true, desc = "Neogit" })
 
