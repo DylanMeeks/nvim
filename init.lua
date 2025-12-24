@@ -59,6 +59,8 @@ vim.keymap.set({ "n", "v", "x" }, "<leader>P", '"+p')
 vim.keymap.set({ "n", "v", "x" }, "<leader>d", '"_d')
 
 vim.keymap.set("i", "<C-c>", "<ESC>")
+vim.keymap.set("t", "", "") -- map esc to always return to normal mode
+vim.keymap.set("t", "", "") -- don't move cursor when <C-o> is done
 
 -- -----------------------------------------------------
 -- Plugin manager
@@ -172,8 +174,33 @@ require("conform").setup({
         rust = { "rustfmt", lsp_format = "fallback" },
     },
 })
-vim.keymap.set("n", "<leader>bf", require("conform").format)
+vim.keymap.set("n", "<leader>bf", function() require("conform").format() end)
+vim.lsp.enable({
+    "autotools_ls",
+    "bashls",
+    "clangd",
+    "emmylua_ls",
+    "lua_ls",
+    "marksman", -- musl support problems
+    -- "pyright",
+    "ruff",
+    -- "svls",
+    -- "veridian",
+    "zls",
+    "tinymist",
+    "rust_analyzer",
+    "gopls",
+})
 
+local virtual_text_enabled = false
+vim.keymap.set("n", "<leader>ll", function()
+    virtual_text_enabled = not virtual_text_enabled
+    vim.diagnostic.config({ virtual_text = virtual_text_enabled })
+end, {})
+
+-- -----------------------------------------------------
+-- Treesitter
+-- -----------------------------------------------------
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { '<filetype>' },
     callback = function()
@@ -197,6 +224,19 @@ require("oil").setup({
         show_hidden = true,
     },
 })
+vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
+
+local harpoon = require("harpoon")
+harpoon:setup()
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Add to harpoon" })
+vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Toogle harpoon" })
+for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
+    vim.keymap.set("n", string.format("<leader>%d", idx), function()
+        harpoon:list():select(idx)
+    end)
+end
+local harpoon_extensions = require("harpoon.extensions")
+harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 
 -- -----------------------------------------------------
 -- Colorscheme
@@ -217,20 +257,7 @@ require("gruber-darker").setup({
     undercurl = true,
     underline = true,
 })
-
-local harpoon = require("harpoon")
-harpoon:setup()
-vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Add to harpoon" })
-vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Toogle harpoon" })
-for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
-    vim.keymap.set("n", string.format("<leader>%d", idx), function()
-        harpoon:list():select(idx)
-    end)
-end
-local harpoon_extensions = require("harpoon.extensions")
-harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
-
-vim.keymap.set("n", "<leader>gs", function() require("neogit").open() end, { silent = true, desc = "Neogit" })
+vim.cmd("colorscheme gruber-darker")
 
 -- -----------------------------------------------------
 -- Telescope
@@ -256,34 +283,7 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' 
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 vim.keymap.set('n', '<leader>fm', builtin.man_pages, { desc = 'Telescope man pages' })
 
-vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
-vim.keymap.set("t", "", "") -- map esc to always return to normal mode
-vim.keymap.set("t", "", "") -- don't move cursor when <C-o> is done
 
-vim.lsp.enable({
-    "autotools_ls",
-    "bashls",
-    "clangd",
-    "emmylua_ls",
-    "lua_ls",
-    "marksman", -- musl support problems
-    -- "pyright",
-    "ruff",
-    -- "svls",
-    -- "veridian",
-    "zls",
-    "tinymist",
-    "rust_analyzer",
-    "gopls",
-})
-
-local virtual_text_enabled = false
-vim.keymap.set("n", "<leader>ll", function()
-    virtual_text_enabled = not virtual_text_enabled
-    vim.diagnostic.config({ virtual_text = virtual_text_enabled })
-end, {})
-
-vim.cmd("colorscheme gruber-darker")
 -- -----------------------------------------------------
 -- LuaSnip
 -- -----------------------------------------------------
