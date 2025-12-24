@@ -18,8 +18,8 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
@@ -36,6 +36,9 @@ vim.opt.updatetime = 50
 
 vim.opt.cursorline = true   -- Horizontal cursor line
 vim.opt.cursorcolumn = true -- Vertical cursor line
+
+-- vim.o.completeopt = "o,.,w,b,u,t"
+vim.o.completeopt = "fuzzy,menuone,noselect,popup"
 
 vim.filetype.plugin = "on"
 
