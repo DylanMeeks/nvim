@@ -124,6 +124,9 @@ end, {})
 require("gitsigns").setup()
 require("neogit").setup({})
 
+require("mason").setup({})
+-- vim.cmd([[MasonInstall clangd clang-format emmylua_ls lua-language-server pyright ruff rust-analyzer gopls ]])
+
 require("conform").setup({
     format_on_save = nil,
     formatters_by_ft = {
@@ -136,7 +139,6 @@ require("conform").setup({
 })
 vim.keymap.set("n", "<leader>bf", require("conform").format)
 
-require("mason").setup()
 require("oil").setup({
     columns = {
         -- "icon",
@@ -217,7 +219,6 @@ vim.keymap.set('n', '<leader>fm', builtin.man_pages, { desc = 'Telescope man pag
 vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
 vim.keymap.set("t", "", "") -- map esc to always return to normal mode
 vim.keymap.set("t", "", "") -- don't move cursor when <C-o> is done
-vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
 
 vim.lsp.enable({
     "autotools_ls",
