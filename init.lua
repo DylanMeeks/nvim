@@ -76,23 +76,34 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
 })
 
 vim.pack.add({
-    { src = "https://github.com/stevearc/oil.nvim" },
-    -- { src = "https://github.com/echasnovski/mini.pick" }, -- Dep for neogit
-    { src = "https://github.com/nvim-telescope/telescope.nvim" }, -- Dep for neogit
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-    { src = "https://github.com/chomosuke/typst-preview.nvim" },
-    -- { src = "https://github.com/neovim/nvim-lspconfig" }, -- I keep this arround only to copy them when I need them
-    { src = "https://github.com/mason-org/mason.nvim" },
+    -- { src = "https://github.com/chomosuke/typst-preview.nvim" },
+    -- { src = "https://github.com/uhs-robert/sshfs.nvim" }, -- cool fs mount over ssh
+
+    -- Snippets
     { src = "https://github.com/L3MON4D3/LuaSnip" },
+
+    -- Navigation
     { src = "https://github.com/ThePrimeagen/harpoon",            version = "harpoon2", },
-    { src = "https://github.com/nvim-lua/plenary.nvim" }, -- Dep for harpoon, neogit
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+    { src = "https://github.com/stevearc/oil.nvim" },
+
+    -- LSP and formatting
+    { src = "https://github.com/mason-org/mason.nvim" },
+    { src = "https://github.com/stevearc/conform.nvim", },
+
+    -- Color theme
     { src = "https://github.com/blazkowolf/gruber-darker.nvim", },
+
+    -- General deps
+    { src = "https://github.com/nvim-telescope/telescope.nvim" }, -- Dep for neogit
+    { src = "https://github.com/nvim-lua/plenary.nvim" },         -- Dep for harpoon, neogit
+    { src = "https://github.com/MunifTanjim/nui.nvim" },          -- Dep for hunk
+
     -- VCS
-    { src = "https://github.com/NeogitOrg/neogit.git" },
     { src = "https://github.com/sindrets/diffview.nvim.git" }, -- Dep for neogit (optional)
+    { src = "https://github.com/NeogitOrg/neogit.git" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/julienvincent/hunk.nvim", },
-    { src = "https://github.com/MunifTanjim/nui.nvim" }, -- Dep for hunk
 })
 
 -- TODO: look into 'formatprg' to see if these formatters can be called natively
