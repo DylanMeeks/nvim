@@ -69,6 +69,9 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
             os.execute(string.format("make -C %s install_jsregexp", plugin_path))
             return
         end
+        if plugin_name == "nvim-treesitter" then
+            vim.cmd([[TSUpdate]])
+        end
     end
 })
 
