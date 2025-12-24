@@ -127,8 +127,17 @@ require("neogit").setup({})
 require("typst-preview").setup({
     dependencies_bin = {
         ['tinymist'] = 'tinymist', -- look in mason dir for executeable
+require("conform").setup({
+    format_on_save = nil,
+    formatters_by_ft = {
+        c = { "clang-format", lsp_format = "fallback" },
+        cpp = { "clang-format", lsp_format = "fallback" },
+        lua = { "emmylua_ls", "stylua", lsp_format = "fallback" },
+        python = { "black", lsp_format = "fallback" },
+        rust = { "rustfmt", lsp_format = "fallback" },
     },
 })
+vim.keymap.set("n", "<leader>bf", require("conform").format)
 
 require("mason").setup()
 require("oil").setup({
