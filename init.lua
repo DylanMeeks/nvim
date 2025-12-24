@@ -60,6 +60,9 @@ vim.keymap.set({ "n", "v", "x" }, "<leader>d", '"_d')
 
 vim.keymap.set("i", "<C-c>", "<ESC>")
 
+-- -----------------------------------------------------
+-- Plugin manager
+-- -----------------------------------------------------
 vim.api.nvim_create_autocmd({ "PackChanged" }, {
     callback = function(ev)
         local data = ev.data
@@ -117,16 +120,21 @@ end
 vim.api.nvim_create_user_command("UpdatePlugins", update_plugins,
     { desc = "Update plugins installed using built-in package manager" })
 
+-- -----------------------------------------------------
 -- Git and jj
+-- -----------------------------------------------------
 vim.api.nvim_create_user_command("DiffEditor", function()
     require("hunk").setup()
 end, {})
 require("gitsigns").setup()
 require("neogit").setup({})
+vim.keymap.set("n", "<leader>gs", function() require("neogit").open() end, { silent = true, desc = "Neogit" })
 
+-- -----------------------------------------------------
+-- LSP and formatting
+-- -----------------------------------------------------
 require("mason").setup({})
 -- vim.cmd([[MasonInstall clangd clang-format emmylua_ls lua-language-server pyright ruff rust-analyzer gopls ]])
-
 require("conform").setup({
     format_on_save = nil,
     formatters_by_ft = {
@@ -148,6 +156,9 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
+-- -----------------------------------------------------
+-- Oil and harpoon
+-- -----------------------------------------------------
 require("oil").setup({
     columns = {
         -- "icon",
@@ -160,6 +171,9 @@ require("oil").setup({
     },
 })
 
+-- -----------------------------------------------------
+-- Colorscheme
+-- -----------------------------------------------------
 require("gruber-darker").setup({
     bold = true,
     invert = {
@@ -191,6 +205,9 @@ harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 
 vim.keymap.set("n", "<leader>gs", function() require("neogit").open() end, { silent = true, desc = "Neogit" })
 
+-- -----------------------------------------------------
+-- Telescope
+-- -----------------------------------------------------
 require('telescope').setup({
     defaults = {
         theme = "ivy",
@@ -250,6 +267,9 @@ vim.keymap.set({ "i", "s" }, "<C-e>", function() ls.expand_or_jump(1) end, { sil
 vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(1) end, { silent = true })
 vim.keymap.set({ "i", "s" }, "<C-K>", function() ls.jump(-1) end, { silent = true })
 
+-- -----------------------------------------------------
+-- Statusline
+-- -----------------------------------------------------
 ---Show attached LSP clients in `[name1, name2]` format.
 ---Long server names will be modified. For example, `lua-language-server` will be shorten to `lua-ls`
 ---Returns an empty string if there aren't any attached LSP clients.
@@ -281,9 +301,14 @@ end
 
 vim.o.statusline = "%{%v:lua._G.statusline()%}"
 
+-- -----------------------------------------------------
+-- Other files
+-- -----------------------------------------------------
 require("config.autocmds")
 
+-- -----------------------------------------------------
 -- Neovide specific config
+-- -----------------------------------------------------
 if vim.g.neovide then
     vim.o.guifont = "CaskaydiaCove Nerd Font:h10"
     vim.g.neovide_cursor_animation_length = 0
