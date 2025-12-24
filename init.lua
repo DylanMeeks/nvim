@@ -106,13 +106,6 @@ vim.pack.add({
     { src = "https://github.com/julienvincent/hunk.nvim", },
 })
 
--- TODO: look into 'formatprg' to see if these formatters can be called natively
---[[
-     beautysh
-     clang-format
-     typstyle
---]]
-
 local update_plugins = function()
     local installed = vim.pack.get()
     local names = {}
