@@ -124,9 +124,6 @@ end, {})
 require("gitsigns").setup()
 require("neogit").setup({})
 
-require("typst-preview").setup({
-    dependencies_bin = {
-        ['tinymist'] = 'tinymist', -- look in mason dir for executeable
 require("conform").setup({
     format_on_save = nil,
     formatters_by_ft = {
