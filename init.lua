@@ -331,7 +331,7 @@ vim.o.statusline = "%{%v:lua._G.statusline()%}"
 -- -----------------------------------------------------
 -- Other files
 -- -----------------------------------------------------
-require("config.autocmds")
+require("autocmds")
 
 -- -----------------------------------------------------
 -- Neovide specific config
