@@ -167,7 +167,7 @@ harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 
 vim.keymap.set("n", "<leader>gs", function() require("neogit").open() end, { silent = true, desc = "Neogit" })
 
-require('telescope').setup {
+require('telescope').setup({
     defaults = {
         theme = "ivy",
     },
@@ -188,7 +188,7 @@ require('telescope').setup {
             theme = "ivy",
         },
     },
-}
+})
 
 local builtin = require('telescope.builtin')
 local ivy = require('telescope.themes').get_dropdown({});
