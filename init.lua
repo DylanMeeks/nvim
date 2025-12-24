@@ -159,6 +159,7 @@ require("oil").setup({
         show_hidden = true,
     },
 })
+
 require("gruber-darker").setup({
     bold = true,
     invert = {
@@ -178,12 +179,8 @@ require("gruber-darker").setup({
 
 local harpoon = require("harpoon")
 harpoon:setup()
-vim.keymap.set("n", "<leader>a", function()
-    harpoon:list():add()
-end, { desc = "Add to harpoon" })
-vim.keymap.set("n", "<leader>e", function()
-    harpoon.ui:toggle_quick_menu(harpoon:list())
-end, { desc = "Toogle harpoon" })
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Add to harpoon" })
+vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Toogle harpoon" })
 for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
     vim.keymap.set("n", string.format("<leader>%d", idx), function()
         harpoon:list():select(idx)
@@ -199,21 +196,11 @@ require('telescope').setup({
         theme = "ivy",
     },
     pickers = {
-        find_files = {
-            theme = "ivy",
-        },
-        live_grep = {
-            theme = "ivy",
-        },
-        buffers = {
-            theme = "ivy",
-        },
-        help_tags = {
-            theme = "ivy",
-        },
-        man_pages = {
-            theme = "ivy",
-        },
+        find_files = { theme = "ivy", },
+        live_grep = { theme = "ivy", },
+        buffers = { theme = "ivy", },
+        help_tags = { theme = "ivy", },
+        man_pages = { theme = "ivy", },
     },
 })
 
@@ -287,6 +274,7 @@ vim.o.statusline = "%{%v:lua._G.statusline()%}"
 
 require("config.autocmds")
 
+-- Neovide specific config
 if vim.g.neovide then
     vim.o.guifont = "CaskaydiaCove Nerd Font:h10"
     vim.g.neovide_cursor_animation_length = 0
