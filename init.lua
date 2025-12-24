@@ -211,11 +211,13 @@ vim.lsp.enable({
     "lua_ls",
     "marksman", -- musl support problems
     -- "pyright",
-    -- "ruff",
+    "ruff",
     -- "svls",
     -- "veridian",
-    -- "zls",
+    "zls",
     "tinymist",
+    "rust_analyzer",
+    "gopls",
 })
 
 local virtual_text_enabled = false
