@@ -240,6 +240,15 @@ vim.keymap.set("n", "<leader>ll", function()
 end, {})
 
 vim.cmd("colorscheme gruber-darker")
+-- -----------------------------------------------------
+-- LuaSnip
+-- -----------------------------------------------------
+require("luasnip").setup({ enable_autosnippets = true })
+require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
+local ls = require("luasnip")
+vim.keymap.set({ "i", "s" }, "<C-e>", function() ls.expand_or_jump(1) end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(1) end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-K>", function() ls.jump(-1) end, { silent = true })
 
 ---Show attached LSP clients in `[name1, name2]` format.
 ---Long server names will be modified. For example, `lua-language-server` will be shorten to `lua-ls`

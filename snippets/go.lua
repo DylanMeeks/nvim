@@ -7,15 +7,15 @@ local conds = require("luasnip.extras.expand_conditions")
 local make_condition = require("luasnip.extras.conditions").make_condition
 
 -- snippets
-ls.add_snippets("go", {
-	s({ trig = "iferr", name = "if err != nil", desc = "go error handling" }, {
-		fmta(
+return {
+    s({ trig = "iferr", name = "if err != nil", desc = "go error handling" }, {
+        fmta(
             [[
             if err != nil {
                 return <>
             }
             ]],
-			{ i(i, "err") }
-		),
-	}),
-})
+            { i(i, "err") }
+        ),
+    }),
+}
