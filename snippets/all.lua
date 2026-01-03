@@ -32,24 +32,4 @@ return {
     s("mail", t("dylan.meeks@icloud.com")),
     s("uta", t("dcm3453@my.utexas.edu")),
     s("gh", t("github.com/DylanMeeks")),
-
-    s("div 1", {
-        t({ "----------------------",
-            "---     ", }), i(1, "title"), t({ "     ---",
-        "-----[[------------]]-----" }),
-    }),
-
-    -- basic expanding comment header
-    -- currently only working for lua
-    s("header 1", {
-        t("----------"),
-        l(l._1:gsub(".", "-"), 1),
-        t({ "----------", "" }),
-        t("---       "),
-        i(1, "header title"),
-        t({ "       ---", "" }),
-        t("----------"),
-        l(l._1:gsub(".", "-"), 1),
-        t({ "----------", "" }),
-    }),
 }
