@@ -101,12 +101,13 @@ vim.pack.add({
 
     -- General deps
     { src = "https://github.com/nvim-telescope/telescope.nvim" }, -- Dep for neogit
-    { src = "https://github.com/nvim-lua/plenary.nvim" },         -- Dep for harpoon, neogit
+    { src = "https://github.com/nvim-lua/plenary.nvim" },         -- Dep for harpoon, neogit, gitlinker
     { src = "https://github.com/MunifTanjim/nui.nvim" },          -- Dep for hunk
 
     -- VCS
-    { src = "https://github.com/sindrets/diffview.nvim.git" }, -- Dep for neogit (optional)
-    { src = "https://github.com/NeogitOrg/neogit.git" },
+    { src = "https://github.com/sindrets/diffview.nvim" }, -- Dep for neogit (optional)
+    { src = "https://github.com/ruifm/gitlinker.nvim" },
+    { src = "https://github.com/NeogitOrg/neogit" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/julienvincent/hunk.nvim", },
 })
@@ -156,6 +157,7 @@ vim.api.nvim_create_user_command("DiffEditor", function()
     require("hunk").setup()
 end, {})
 require("gitsigns").setup()
+require("gitlinker").setup()
 require("neogit").setup({})
 vim.keymap.set("n", "<leader>gs", function() require("neogit").open() end, { silent = true, desc = "Neogit" })
 
