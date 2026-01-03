@@ -287,6 +287,7 @@ vim.keymap.set('n', '<leader>fm', builtin.man_pages, { desc = 'Telescope man pag
 -- -----------------------------------------------------
 -- LuaSnip
 -- -----------------------------------------------------
+-- https://ejmastnak.com/tutorials/vim-latex/luasnip/
 require("luasnip").setup({ enable_autosnippets = true })
 require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
 local ls = require("luasnip")
