@@ -4,6 +4,10 @@
       "rev": "3732756842a2f7e0e76a7b0487e9692072857277",
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
+    "cling.nvim": {
+      "rev": "c47dd7515e79e01c43fedbb8b827edbd0e111781",
+      "src": "https://github.com/juniorsundar/cling.nvim"
+    },
     "conform.nvim": {
       "rev": "5420c4b5ea0aeb99c09cfbd4fd0b70d257b44f25",
       "src": "https://github.com/stevearc/conform.nvim"
