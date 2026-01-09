@@ -297,12 +297,46 @@ end, {})
 -- -----------------------------------------------------
 -- Treesitter
 -- -----------------------------------------------------
+-- Try and add hledger parser
+-- vim.api.nvim_create_autocmd('User', {
+--     pattern = 'TSUpdate',
+--     callback = function()
+--         require('nvim-treesitter.parsers').hledger = {
+--             install_info = {
+--                 url = 'https://github.com/chrislloyd/tree-sitter-hledger',
+--                 -- optional entries:
+--                 generate = true,
+--                 generate_from_json = true, -- only needed if repo does not contain `src/grammar.json` either
+--                 -- queries = 'queries/neovim', -- also install queries from given directory
+--             },
+--         }
+--     end
+-- })
+vim.treesitter.language.register('hledger', { 'journal', 'j', 'hledger', 'ledger', })
+
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { '<filetype>' },
-    callback = function()
-        vim.treesitter.start()
-        vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        vim.wo[0][0].foldmethod = 'expr'
+    group = vim.api.nvim_create_augroup('treesitter.setup', {}),
+    callback = function(args)
+        local buf = args.buf
+        local filetype = args.match
+
+        -- need some mechanism to avoid running on buffers that do not
+        -- correspond to a language (like oil.nvim buffers), this implementation
+        -- checks if a parser exists for the current language
+        local language = vim.treesitter.language.get_lang(filetype) or filetype
+        if not vim.treesitter.language.add(language) then
+            return
+        end
+
+        -- Treesitter folding
+        vim.wo.foldmethod = 'expr'
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
+        -- Treesitter highlighting
+        vim.treesitter.start(buf, language)
+
+        -- Treesitter indenting
+        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end,
 })
 
