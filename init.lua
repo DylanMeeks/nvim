@@ -36,9 +36,10 @@ vim.opt.updatetime = 50
 
 vim.opt.cursorline = true   -- Horizontal cursor line
 vim.opt.cursorcolumn = true -- Vertical cursor line
+vim.o.colorcolumn = "80"    -- Vertical line at 80 col
 
--- vim.o.completeopt = "o,.,w,b,u,t"
-vim.o.completeopt = "fuzzy,menuone,noselect,popup"
+vim.o.complete = ".,o,w,b,u,t"
+vim.o.completeopt = "fuzzy,menuone,noinsert,popup"
 
 vim.filetype.plugin = "on"
 
