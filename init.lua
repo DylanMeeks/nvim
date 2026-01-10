@@ -287,10 +287,24 @@ vim.lsp.enable({
     -- "gopls",
 })
 
-local virtual_text_enabled = false
+local lsp_visuals_enabled = false
 vim.keymap.set("n", "<leader>ll", function()
-    virtual_text_enabled = not virtual_text_enabled
-    vim.diagnostic.config({ virtual_text = virtual_text_enabled })
+    if not lsp_visuals_enabled then
+        vim.diagnostic.config({
+            underline = false,
+            virtual_text = false,
+            virtual_lines = false,
+            signs = false,
+            float = false,
+            status = false,
+            update_in_insert = false,
+            severity_sort = false,
+            jump = false,
+        })
+    else
+        vim.diagnostic.config({ virtual_text = lsp_visuals_enabled })
+    end
+    lsp_visuals_enabled = not lsp_visuals_enabled
 end, {})
 
 -- -----------------------------------------------------
@@ -328,8 +342,8 @@ vim.api.nvim_create_autocmd('FileType', {
         end
 
         -- Treesitter folding
-        vim.wo.foldmethod = 'expr'
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        -- vim.wo.foldmethod = 'expr'
+        -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
         -- Treesitter highlighting
         vim.treesitter.start(buf, language)
