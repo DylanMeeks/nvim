@@ -255,6 +255,8 @@ require("cling").setup {
     },
 }
 
+vim.keymap.set("n", "<leader>cc", "<CMD>Cling<CR>", { desc = "Emacs like compile command" })
+
 -- -----------------------------------------------------
 -- LSP and formatting
 -- -----------------------------------------------------
