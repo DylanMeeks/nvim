@@ -259,7 +259,7 @@ require("cling").setup {
 -- LSP and formatting
 -- -----------------------------------------------------
 require("mason").setup({})
--- vim.cmd([[MasonInstall clangd clang-format emmylua_ls lua-language-server pyright ruff rust-analyzer gopls ]])
+
 require("conform").setup({
     format_on_save = nil,
     formatters_by_ft = {
@@ -271,21 +271,20 @@ require("conform").setup({
     },
 })
 vim.keymap.set("n", "<leader>bf", function() require("conform").format() end)
+
 vim.lsp.enable({
-    "autotools_ls",
-    "bashls",
     "clangd",
     "emmylua_ls",
     "lua_ls",
     "marksman", -- musl support problems
-    -- "pyright",
     "ruff",
-    -- "svls",
+    "ty",
+    "svls",
     -- "veridian",
     "zls",
     "tinymist",
-    "rust_analyzer",
-    "gopls",
+    -- "rust_analyzer",
+    -- "gopls",
 })
 
 local virtual_text_enabled = false
