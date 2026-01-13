@@ -281,7 +281,7 @@ require("conform").setup({
         rust = { "rustfmt", lsp_format = "fallback" },
     },
 })
-vim.keymap.set("n", "<leader>bf", function() require("conform").format() end)
+vim.keymap.set("n", "<leader>bf", function() require("conform").format() end, { desc = "Format using Conform" })
 
 vim.lsp.enable({
     "clangd",
@@ -316,7 +316,7 @@ vim.keymap.set("n", "<leader>ll", function()
         vim.diagnostic.config({ virtual_text = lsp_visuals_enabled })
     end
     lsp_visuals_enabled = not lsp_visuals_enabled
-end, {})
+end, { desc = "Toggle Lsp diagnostics being shown" })
 
 -- -----------------------------------------------------
 -- Treesitter
@@ -352,7 +352,7 @@ vim.api.nvim_create_autocmd('FileType', {
             return
         end
 
-        -- Treesitter folding
+        -- Treesitter folding (I generally don't like folding"
         -- vim.wo.foldmethod = 'expr'
         -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
@@ -379,7 +379,7 @@ require("oil").setup({
     },
     watch_for_changes = true,
 })
-vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
+vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>", { desc = "Open Oil file explorer" })
 
 local harpoon = require("harpoon")
 harpoon:setup()
@@ -388,7 +388,7 @@ vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon
 for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
     vim.keymap.set("n", string.format("<leader>%d", idx), function()
         harpoon:list():select(idx)
-    end)
+    end, { desc = "Open ith member of Harpoon list" })
 end
 local harpoon_extensions = require("harpoon.extensions")
 harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
