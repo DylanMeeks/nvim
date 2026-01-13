@@ -37,6 +37,10 @@
       "rev": "029566b4414f79508e6763a80ab6c7eda4a6dd97",
       "src": "https://github.com/julienvincent/hunk.nvim"
     },
+    "key-analyzer.nvim": {
+      "rev": "4e4bef34498e821bcbd5203f44db8b67e4f10e04",
+      "src": "https://github.com/meznaric/key-analyzer.nvim.git"
+    },
     "mason.nvim": {
       "rev": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800",
       "src": "https://github.com/mason-org/mason.nvim"
