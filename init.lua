@@ -84,7 +84,10 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
 vim.pack.add({
     -- { src = "https://github.com/chomosuke/typst-preview.nvim" },
 
+
+    -- Misc
     -- { src = "https://github.com/uhs-robert/sshfs.nvim" }, -- cool fs mount over ssh
+    { src = "https://github.com/meznaric/key-analyzer.nvim.git" }, -- show what keys are used
 
     -- Snippets
     { src = "https://github.com/L3MON4D3/LuaSnip" },
@@ -154,6 +157,11 @@ local pack_clean = function()
 end
 vim.api.nvim_create_user_command("CleanPlugins", pack_clean,
     { desc = "Clean plugins installed using built-in package manager" })
+
+-- -----------------------------------------------------
+-- KeyAnalyzer to show keymaps
+-- -----------------------------------------------------
+require("key-analyzer").setup({ promotion = false, })
 
 -- -----------------------------------------------------
 -- Git and jj
