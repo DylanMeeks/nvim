@@ -5,7 +5,7 @@
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "cling.nvim": {
-      "rev": "c47dd7515e79e01c43fedbb8b827edbd0e111781",
+      "rev": "6d49fb4c60d5125256645852d094b5d5ff6b41be",
       "src": "https://github.com/juniorsundar/cling.nvim"
     },
     "conform.nvim": {
