@@ -94,6 +94,7 @@ vim.pack.add({
 
     -- Better Shell Commands
     { src = "https://github.com/juniorsundar/cling.nvim", },
+    -- { src = "https://github.com/DylanMeeks/cling.nvim", },
 
     -- Navigation
     { src = "https://github.com/ThePrimeagen/harpoon",            version = "harpoon2", },
