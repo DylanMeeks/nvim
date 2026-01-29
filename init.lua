@@ -1,4 +1,4 @@
-vim.cmd([[set mouse=]]) -- mouse is for the weak
+vim.cmd([[set mouse=]])          -- mouse is for the weak
 
 vim.opt.guicursor = "a:blinkon0" -- no blink
 vim.opt.winborder = "single"
@@ -7,12 +7,12 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 
-vim.opt.tabstop = 4 -- A TAB character looks like 4 spaces
-vim.opt.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.opt.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
-vim.opt.shiftwidth = 4 -- Number of spaces inserted when indenting
+vim.opt.tabstop = 4        -- A TAB character looks like 4 spaces
+vim.opt.expandtab = true   -- Pressing the TAB key will insert spaces instead of a TAB character
+vim.opt.softtabstop = 4    -- Number of spaces inserted instead of a TAB character
+vim.opt.shiftwidth = 4     -- Number of spaces inserted when indenting
 vim.opt.smartindent = true -- syntax aware indentations for newline inserts
-vim.opt.list = true -- Shows > and - for tabs and trailing spaces
+vim.opt.list = true        -- Shows > and - for tabs and trailing spaces
 
 vim.opt.wrap = false
 
@@ -34,9 +34,9 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.cursorline = true -- Horizontal cursor line
+vim.opt.cursorline = true   -- Horizontal cursor line
 vim.opt.cursorcolumn = true -- Vertical cursor line
-vim.o.colorcolumn = "80" -- Vertical line at 80 col
+vim.o.colorcolumn = "80"    -- Vertical line at 80 col
 
 vim.o.complete = ".,o,w,b,u,t"
 vim.o.completeopt = "fuzzy,menuone,noinsert,popup"
@@ -67,101 +67,101 @@ vim.keymap.set("t", "", "") -- don't move cursor when <C-o> is done
 -- Plugin manager
 -- -----------------------------------------------------
 vim.api.nvim_create_autocmd({ "PackChanged" }, {
-	callback = function(ev)
-		local data = ev.data
-		local plugin_name = data.spec.name
-		local plugin_path = data.path
-		if plugin_name == "LuaSnip" and data.kind == "install" then
-			os.execute(string.format("make -C %s install_jsregexp", plugin_path))
-			return
-		end
-		if plugin_name == "nvim-treesitter" then
-			vim.cmd([[TSUpdate]])
-		end
-	end,
+    callback = function(ev)
+        local data = ev.data
+        local plugin_name = data.spec.name
+        local plugin_path = data.path
+        if plugin_name == "LuaSnip" and data.kind == "install" then
+            os.execute(string.format("make -C %s install_jsregexp", plugin_path))
+            return
+        end
+        if plugin_name == "nvim-treesitter" then
+            vim.cmd([[TSUpdate]])
+        end
+    end,
 })
 
 vim.pack.add({
-	-- { src = "https://github.com/chomosuke/typst-preview.nvim" },
+    -- { src = "https://github.com/chomosuke/typst-preview.nvim" },
 
-	-- Misc
-	-- { src = "https://github.com/uhs-robert/sshfs.nvim" }, -- cool fs mount over ssh
-	{ src = "https://github.com/meznaric/key-analyzer.nvim.git" }, -- show what keys are used
+    -- Misc
+    -- { src = "https://github.com/uhs-robert/sshfs.nvim" }, -- cool fs mount over ssh
+    { src = "https://github.com/meznaric/key-analyzer.nvim.git" }, -- show what keys are used
 
-	-- Snippets
-	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+    -- Snippets
+    { src = "https://github.com/L3MON4D3/LuaSnip" },
 
-	-- Better Shell Commands
-	{ src = "https://github.com/juniorsundar/cling.nvim" },
-	-- { src = "https://github.com/DylanMeeks/cling.nvim", },
+    -- Better Shell Commands
+    { src = "https://github.com/juniorsundar/cling.nvim" },
+    -- { src = "https://github.com/DylanMeeks/cling.nvim", },
 
-	-- Navigation
-	{ src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-	{ src = "https://github.com/stevearc/oil.nvim" },
+    -- Navigation
+    { src = "https://github.com/ThePrimeagen/harpoon",            version = "harpoon2" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+    { src = "https://github.com/stevearc/oil.nvim" },
 
-	-- LSP and formatting
-	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/stevearc/conform.nvim" },
+    -- LSP and formatting
+    { src = "https://github.com/mason-org/mason.nvim" },
+    { src = "https://github.com/stevearc/conform.nvim" },
 
-	-- Color theme
-	{ src = "https://github.com/blazkowolf/gruber-darker.nvim" },
+    -- Color theme
+    { src = "https://github.com/blazkowolf/gruber-darker.nvim" },
 
-	-- General deps
-	{ src = "https://github.com/nvim-telescope/telescope.nvim" }, -- Dep for neogit
-	{ src = "https://github.com/nvim-lua/plenary.nvim" }, -- Dep for harpoon, neogit, gitlinker
-	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- Dep for hunk
+    -- General deps
+    { src = "https://github.com/nvim-telescope/telescope.nvim" }, -- Dep for neogit
+    { src = "https://github.com/nvim-lua/plenary.nvim" },         -- Dep for harpoon, neogit, gitlinker
+    { src = "https://github.com/MunifTanjim/nui.nvim" },          -- Dep for hunk
 
-	-- VCS
-	{ src = "https://github.com/sindrets/diffview.nvim" }, -- Dep for neogit (optional)
-	{ src = "https://github.com/ruifm/gitlinker.nvim" },
-	{ src = "https://github.com/NeogitOrg/neogit" },
-	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
-	{ src = "https://github.com/julienvincent/hunk.nvim" },
+    -- VCS
+    { src = "https://github.com/sindrets/diffview.nvim" }, -- Dep for neogit (optional)
+    { src = "https://github.com/ruifm/gitlinker.nvim" },
+    { src = "https://github.com/NeogitOrg/neogit" },
+    { src = "https://github.com/lewis6991/gitsigns.nvim" },
+    { src = "https://github.com/julienvincent/hunk.nvim" },
 })
 
 local update_plugins = function()
-	local installed = vim.pack.get()
-	local names = {}
-	for _, v in ipairs(installed) do
-		table.insert(names, v.spec.name)
-	end
-	vim.pack.update(names)
+    local installed = vim.pack.get()
+    local names = {}
+    for _, v in ipairs(installed) do
+        table.insert(names, v.spec.name)
+    end
+    vim.pack.update(names)
 end
 vim.api.nvim_create_user_command(
-	"UpdatePlugins",
-	update_plugins,
-	{ desc = "Update plugins installed using built-in package manager" }
+    "UpdatePlugins",
+    update_plugins,
+    { desc = "Update plugins installed using built-in package manager" }
 )
 
 local pack_clean = function()
-	local active_plugins = {}
-	local unused_plugins = {}
+    local active_plugins = {}
+    local unused_plugins = {}
 
-	for _, plugin in ipairs(vim.pack.get()) do
-		active_plugins[plugin.spec.name] = plugin.active
-	end
+    for _, plugin in ipairs(vim.pack.get()) do
+        active_plugins[plugin.spec.name] = plugin.active
+    end
 
-	for _, plugin in ipairs(vim.pack.get()) do
-		if not active_plugins[plugin.spec.name] then
-			table.insert(unused_plugins, plugin.spec.name)
-		end
-	end
+    for _, plugin in ipairs(vim.pack.get()) do
+        if not active_plugins[plugin.spec.name] then
+            table.insert(unused_plugins, plugin.spec.name)
+        end
+    end
 
-	if #unused_plugins == 0 then
-		print("No unused plugins.")
-		return
-	end
+    if #unused_plugins == 0 then
+        print("No unused plugins.")
+        return
+    end
 
-	local choice = vim.fn.confirm("Remove unused plugins?", "&Yes\n&No", 2)
-	if choice == 1 then
-		vim.pack.del(unused_plugins)
-	end
+    local choice = vim.fn.confirm("Remove unused plugins?", "&Yes\n&No", 2)
+    if choice == 1 then
+        vim.pack.del(unused_plugins)
+    end
 end
 vim.api.nvim_create_user_command(
-	"CleanPlugins",
-	pack_clean,
-	{ desc = "Clean plugins installed using built-in package manager" }
+    "CleanPlugins",
+    pack_clean,
+    { desc = "Clean plugins installed using built-in package manager" }
 )
 
 -- -----------------------------------------------------
@@ -173,103 +173,103 @@ require("key-analyzer").setup({ promotion = false })
 -- Git and jj
 -- -----------------------------------------------------
 vim.api.nvim_create_user_command("DiffEditor", function()
-	require("hunk").setup()
+    require("hunk").setup()
 end, {})
 require("gitsigns").setup()
 require("gitlinker").setup()
 require("neogit").setup({})
 vim.keymap.set("n", "<leader>gs", function()
-	require("neogit").open()
+    require("neogit").open()
 end, { silent = true, desc = "Neogit" })
 
 -- -----------------------------------------------------
 -- Cling setupd and JJ setup
 -- -----------------------------------------------------
 local function strip_ansi(str)
-	return str:gsub("\27%[[0-9;]*m", "")
+    return str:gsub("\27%[[0-9;]*m", "")
 end
 
 local function get_file_from_line(line)
-	local clean = strip_ansi(line)
-	local file = clean:match("^Modified regular file (.*):$")
-	if file then
-		return file, "Modified"
-	end
-	file = clean:match("^Added regular file (.*):$")
-	if file then
-		return file, "Added"
-	end
-	file = clean:match("^Removed regular file (.*):$")
-	if file then
-		return file, "Removed"
-	end
-	file = clean:match("^Renamed .* to (.*):$")
-	if file then
-		return file, "Renamed"
-	end
-	local _, b = clean:match("^diff %-%-git a/(.*) b/(.*)")
-	if b then
-		return b, "Git Diff"
-	end
-	return nil
+    local clean = strip_ansi(line)
+    local file = clean:match("^Modified regular file (.*):$")
+    if file then
+        return file, "Modified"
+    end
+    file = clean:match("^Added regular file (.*):$")
+    if file then
+        return file, "Added"
+    end
+    file = clean:match("^Removed regular file (.*):$")
+    if file then
+        return file, "Removed"
+    end
+    file = clean:match("^Renamed .* to (.*):$")
+    if file then
+        return file, "Renamed"
+    end
+    local _, b = clean:match("^diff %-%-git a/(.*) b/(.*)")
+    if b then
+        return b, "Git Diff"
+    end
+    return nil
 end
 
 local function populate_quickfix(buf)
-	local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-	local qf_list = {}
-	local current_file = nil
-	local current_type = nil
-	local last_was_gap = true
+    local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+    local qf_list = {}
+    local current_file = nil
+    local current_type = nil
+    local last_was_gap = true
 
-	for _, raw_line in ipairs(lines) do
-		local line = strip_ansi(raw_line)
-		local file, type = get_file_from_line(line)
+    for _, raw_line in ipairs(lines) do
+        local line = strip_ansi(raw_line)
+        local file, type = get_file_from_line(line)
 
-		if file then
-			current_file = vim.trim(file)
-			current_type = type
-			last_was_gap = true
-		elseif line:match("^%s*%.%.%.%s*$") then
-			last_was_gap = true
-		elseif current_file then
-			local old, new = line:match("^%s*([0-9]*)%s+([0-9]*):")
-			if old or new then
-				if last_was_gap then
-					local lnum = tonumber(new) or tonumber(old) or 1
-					local text = line:sub((line:find(":") or 0) + 1)
-					table.insert(qf_list, {
-						filename = current_file,
-						lnum = lnum,
-						text = string.format("[%s] %s", current_type or "Change", vim.trim(text)),
-					})
-					last_was_gap = false
-				end
-			end
-		end
-	end
+        if file then
+            current_file = vim.trim(file)
+            current_type = type
+            last_was_gap = true
+        elseif line:match("^%s*%.%.%.%s*$") then
+            last_was_gap = true
+        elseif current_file then
+            local old, new = line:match("^%s*([0-9]*)%s+([0-9]*):")
+            if old or new then
+                if last_was_gap then
+                    local lnum = tonumber(new) or tonumber(old) or 1
+                    local text = line:sub((line:find(":") or 0) + 1)
+                    table.insert(qf_list, {
+                        filename = current_file,
+                        lnum = lnum,
+                        text = string.format("[%s] %s", current_type or "Change", vim.trim(text)),
+                    })
+                    last_was_gap = false
+                end
+            end
+        end
+    end
 
-	if #qf_list > 0 then
-		vim.fn.setqflist(qf_list, "r")
-		vim.notify("Quickfix populated with " .. #qf_list .. " entries", vim.log.levels.INFO)
-		vim.cmd("copen")
-	else
-		vim.notify("No file headers or hunks found", vim.log.levels.WARN)
-	end
+    if #qf_list > 0 then
+        vim.fn.setqflist(qf_list, "r")
+        vim.notify("Quickfix populated with " .. #qf_list .. " entries", vim.log.levels.INFO)
+        vim.cmd("copen")
+    else
+        vim.notify("No file headers or hunks found", vim.log.levels.WARN)
+    end
 end
 
 require("cling").setup({
-	wrappers = {
-		{
-			binary = "jj",
-			command = "JJ",
-			completion_cmd = "jj util completion bash",
-			keymaps = function(buf)
-				vim.keymap.set("n", "<C-q>", function()
-					populate_quickfix(buf)
-				end, { buffer = buf, silent = true, desc = "JJ: Move diffs to quickfix" })
-			end,
-		},
-	},
+    wrappers = {
+        {
+            binary = "jj",
+            command = "JJ",
+            completion_cmd = "jj util completion bash",
+            keymaps = function(buf)
+                vim.keymap.set("n", "<C-q>", function()
+                    populate_quickfix(buf)
+                end, { buffer = buf, silent = true, desc = "JJ: Move diffs to quickfix" })
+            end,
+        },
+    },
 })
 
 vim.keymap.set("n", "<leader>cc", "<CMD>Cling<CR>", { desc = "Emacs like compile command" })
@@ -280,66 +280,66 @@ vim.keymap.set("n", "<leader>cc", "<CMD>Cling<CR>", { desc = "Emacs like compile
 require("mason").setup({})
 
 require("conform").setup({
-	format_on_save = nil,
-	formatters_by_ft = {
-		c = { "clang-format", lsp_format = "fallback" },
-		cpp = { "clang-format", lsp_format = "fallback" },
-		lua = { "stylua", "emmylua_ls", lsp_format = "fallback" },
-		python = { "black", lsp_format = "fallback" },
-		rust = { "rustfmt", lsp_format = "fallback" },
-	},
+    format_on_save = nil,
+    formatters_by_ft = {
+        c = { "clang-format", lsp_format = "fallback" },
+        cpp = { "clang-format", lsp_format = "fallback" },
+        lua = { "stylua", "emmylua_ls", lsp_format = "fallback" },
+        python = { "black", lsp_format = "fallback" },
+        rust = { "rustfmt", lsp_format = "fallback" },
+    },
 })
 vim.keymap.set("n", "<leader>bf", function()
-	require("conform").format()
+    require("conform").format()
 end, { desc = "Format using Conform" })
 
 vim.lsp.enable({
-	"autotools_ls",
-	"clangd",
-	"emmylua_ls",
-	"lua_ls",
-	-- "marksman", -- musl support problems
-	"ruff",
-	"ty",
-	"svls",
-	-- "veridian",
-	"zls",
-	"tinymist",
-	-- "rust_analyzer",
-	-- "gopls",
+    "autotools_ls",
+    "clangd",
+    "emmylua_ls",
+    "lua_ls",
+    -- "marksman", -- musl support problems
+    "ruff",
+    "ty",
+    "svls",
+    -- "veridian",
+    "zls",
+    "tinymist",
+    -- "rust_analyzer",
+    -- "gopls",
 })
 
 vim.diagnostic.config({
-	underline = false,
-	virtual_text = false,
-	virtual_lines = false,
-	signs = false,
-	float = false,
-	status = false,
-	update_in_insert = false,
-	severity_sort = false,
-	jump = false,
+    underline = false,
+    virtual_text = false,
+    virtual_lines = false,
+    signs = false,
+    float = false,
+    status = false,
+    update_in_insert = false,
+    severity_sort = false,
+    jump = false,
 })
 
 local lsp_visuals_enabled = false
 vim.keymap.set("n", "<leader>ll", function()
-	if not lsp_visuals_enabled then
-		vim.diagnostic.config({
-			underline = false,
-			virtual_text = false,
-			virtual_lines = false,
-			signs = false,
-			float = false,
-			status = false,
-			update_in_insert = false,
-			severity_sort = false,
-			jump = false,
-		})
-	else
-		-- vim.diagnostic.config({ virtual_text = lsp_visuals_enabled })
-		vim.diagnostic.config({ virtual_lines = lsp_visuals_enabled })
-	end
-	lsp_visuals_enabled = not lsp_visuals_enabled
+    if not lsp_visuals_enabled then
+        vim.diagnostic.config({
+            underline = false,
+            virtual_text = false,
+            virtual_lines = false,
+            signs = false,
+            float = false,
+            status = false,
+            update_in_insert = false,
+            severity_sort = false,
+            jump = false,
+        })
+    else
+        -- vim.diagnostic.config({ virtual_text = lsp_visuals_enabled })
+        vim.diagnostic.config({ virtual_lines = lsp_visuals_enabled })
+    end
+    lsp_visuals_enabled = not lsp_visuals_enabled
 end, { desc = "Toggle Lsp diagnostics being shown" })
 
 -- -----------------------------------------------------
@@ -363,60 +363,60 @@ end, { desc = "Toggle Lsp diagnostics being shown" })
 vim.treesitter.language.register("hledger", { "journal", "j", "hledger", "ledger" })
 
 vim.api.nvim_create_autocmd("FileType", {
-	group = vim.api.nvim_create_augroup("treesitter.setup", {}),
-	callback = function(args)
-		local buf = args.buf
-		local filetype = args.match
+    group = vim.api.nvim_create_augroup("treesitter.setup", {}),
+    callback = function(args)
+        local buf = args.buf
+        local filetype = args.match
 
-		-- need some mechanism to avoid running on buffers that do not
-		-- correspond to a language (like oil.nvim buffers), this implementation
-		-- checks if a parser exists for the current language
-		local language = vim.treesitter.language.get_lang(filetype) or filetype
-		if not vim.treesitter.language.add(language) then
-			return
-		end
+        -- need some mechanism to avoid running on buffers that do not
+        -- correspond to a language (like oil.nvim buffers), this implementation
+        -- checks if a parser exists for the current language
+        local language = vim.treesitter.language.get_lang(filetype) or filetype
+        if not vim.treesitter.language.add(language) then
+            return
+        end
 
-		-- Treesitter folding (I generally don't like folding)
-		-- vim.wo.foldmethod = 'expr'
-		-- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        -- Treesitter folding (I generally don't like folding)
+        -- vim.wo.foldmethod = 'expr'
+        -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
-		-- Treesitter highlighting
-		vim.treesitter.start(buf, language)
+        -- Treesitter highlighting
+        vim.treesitter.start(buf, language)
 
-		-- Treesitter indenting
-		vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-	end,
+        -- Treesitter indenting
+        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
 })
 
 -- -----------------------------------------------------
 -- Oil and harpoon
 -- -----------------------------------------------------
 require("oil").setup({
-	columns = {
-		-- "icon",
-		"permissions",
-		"size",
-		-- "mtime",
-	},
-	view_options = {
-		show_hidden = true,
-	},
-	watch_for_changes = true,
+    columns = {
+        -- "icon",
+        "permissions",
+        "size",
+        -- "mtime",
+    },
+    view_options = {
+        show_hidden = true,
+    },
+    watch_for_changes = true,
 })
 vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>", { desc = "Open Oil file explorer" })
 
 local harpoon = require("harpoon")
 harpoon:setup()
 vim.keymap.set("n", "<leader>a", function()
-	harpoon:list():add()
+    harpoon:list():add()
 end, { desc = "Add to harpoon" })
 vim.keymap.set("n", "<leader>e", function()
-	harpoon.ui:toggle_quick_menu(harpoon:list())
+    harpoon.ui:toggle_quick_menu(harpoon:list())
 end, { desc = "Toogle harpoon" })
 for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
-	vim.keymap.set("n", string.format("<leader>%d", idx), function()
-		harpoon:list():select(idx)
-	end, { desc = "Open ith member of Harpoon list" })
+    vim.keymap.set("n", string.format("<leader>%d", idx), function()
+        harpoon:list():select(idx)
+    end, { desc = "Open ith member of Harpoon list" })
 end
 local harpoon_extensions = require("harpoon.extensions")
 harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
@@ -425,20 +425,20 @@ harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 -- Colorscheme
 -- -----------------------------------------------------
 require("gruber-darker").setup({
-	bold = true,
-	invert = {
-		signs = false,
-		tabline = false,
-		visual = false,
-	},
-	italic = {
-		strings = false,
-		comments = false,
-		operators = false,
-		folds = false,
-	},
-	undercurl = true,
-	underline = true,
+    bold = true,
+    invert = {
+        signs = false,
+        tabline = false,
+        visual = false,
+    },
+    italic = {
+        strings = false,
+        comments = false,
+        operators = false,
+        folds = false,
+    },
+    undercurl = true,
+    underline = true,
 })
 vim.cmd("colorscheme gruber-darker")
 
@@ -446,16 +446,16 @@ vim.cmd("colorscheme gruber-darker")
 -- Telescope
 -- -----------------------------------------------------
 require("telescope").setup({
-	defaults = {
-		theme = "ivy",
-	},
-	pickers = {
-		find_files = { theme = "ivy" },
-		live_grep = { theme = "ivy" },
-		buffers = { theme = "ivy" },
-		help_tags = { theme = "ivy" },
-		man_pages = { theme = "ivy" },
-	},
+    defaults = {
+        theme = "ivy",
+    },
+    pickers = {
+        find_files = { theme = "ivy" },
+        live_grep = { theme = "ivy" },
+        buffers = { theme = "ivy" },
+        help_tags = { theme = "ivy" },
+        man_pages = { theme = "ivy" },
+    },
 })
 
 local builtin = require("telescope.builtin")
@@ -474,13 +474,13 @@ require("luasnip").setup({ enable_autosnippets = true })
 require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
 local ls = require("luasnip")
 vim.keymap.set({ "i", "s" }, "<C-e>", function()
-	ls.expand_or_jump(1)
+    ls.expand_or_jump(1)
 end, { silent = true })
 vim.keymap.set({ "i", "s" }, "<C-J>", function()
-	ls.jump(1)
+    ls.jump(1)
 end, { silent = true })
 vim.keymap.set({ "i", "s" }, "<C-K>", function()
-	ls.jump(-1)
+    ls.jump(-1)
 end, { silent = true })
 
 -- -----------------------------------------------------
@@ -491,28 +491,28 @@ end, { silent = true })
 ---Returns an empty string if there aren't any attached LSP clients.
 ---@return string
 local function lsp_status()
-	local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
-	if #attached_clients == 0 then
-		return ""
-	end
-	local names = vim.iter(attached_clients)
-		:map(function(client)
-			local name = client.name:gsub("language.server", "ls")
-			return name
-		end)
-		:totable()
-	return "[" .. table.concat(names, ", ") .. "]"
+    local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
+    if #attached_clients == 0 then
+        return ""
+    end
+    local names = vim.iter(attached_clients)
+        :map(function(client)
+            local name = client.name:gsub("language.server", "ls")
+            return name
+        end)
+        :totable()
+    return "[" .. table.concat(names, ", ") .. "]"
 end
 
 function _G.statusline()
-	return table.concat({
-		"%f",
-		"%h%w%m%r",
-		"%=",
-		lsp_status(),
-		" %-14(%l,%c%V%)",
-		"%P",
-	}, " ")
+    return table.concat({
+        "%f",
+        "%h%w%m%r",
+        "%=",
+        lsp_status(),
+        " %-14(%l,%c%V%)",
+        "%P",
+    }, " ")
 end
 
 vim.o.statusline = "%{%v:lua._G.statusline()%}"
@@ -526,10 +526,10 @@ require("autocmds")
 -- Neovide specific config
 -- -----------------------------------------------------
 if vim.g.neovide then
-	vim.o.guifont = "CaskaydiaCove Nerd Font:h10"
-	vim.g.neovide_cursor_animation_length = 0
-	vim.g.neovide_cursor_animate_in_insert_mode = false
-	vim.g.neovide_cursor_animate_command_line = false
-	vim.g.neovide_scroll_animation_far_lines = 0
-	vim.g.neovide_scroll_animation_length = 0
+    vim.o.guifont = "CaskaydiaCove Nerd Font:h10"
+    vim.g.neovide_cursor_animation_length = 0
+    vim.g.neovide_cursor_animate_in_insert_mode = false
+    vim.g.neovide_cursor_animate_command_line = false
+    vim.g.neovide_scroll_animation_far_lines = 0
+    vim.g.neovide_scroll_animation_length = 0
 end
