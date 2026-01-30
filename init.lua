@@ -86,7 +86,7 @@ vim.pack.add({
 
     -- Misc
     -- { src = "https://github.com/uhs-robert/sshfs.nvim" }, -- cool fs mount over ssh
-    { src = "https://github.com/meznaric/key-analyzer.nvim.git" }, -- show what keys are used
+    -- { src = "https://github.com/meznaric/key-analyzer.nvim.git" }, -- show what keys are used
 
     -- Snippets
     { src = "https://github.com/L3MON4D3/LuaSnip" },
@@ -167,7 +167,7 @@ vim.api.nvim_create_user_command(
 -- -----------------------------------------------------
 -- KeyAnalyzer to show keymaps
 -- -----------------------------------------------------
-require("key-analyzer").setup({ promotion = false })
+-- require("key-analyzer").setup({ promotion = false })
 
 -- -----------------------------------------------------
 -- Git and jj
@@ -287,6 +287,7 @@ require("conform").setup({
         lua = { "stylua", "emmylua_ls", lsp_format = "fallback" },
         python = { "black", lsp_format = "fallback" },
         rust = { "rustfmt", lsp_format = "fallback" },
+        verilog = { "verible", lsp_format = "fallback" },
     },
 })
 vim.keymap.set("n", "<leader>bf", function()
@@ -302,7 +303,8 @@ vim.lsp.enable({
     "ruff",
     "ty",
     "svls",
-    -- "veridian",
+    "verible",
+    "veridian",
     "zls",
     "tinymist",
     -- "rust_analyzer",
