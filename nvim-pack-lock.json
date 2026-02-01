@@ -43,7 +43,8 @@
     },
     "mason.nvim": {
       "rev": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800",
-      "src": "https://github.com/mason-org/mason.nvim"
+      "src": "https://github.com/mason-org/mason.nvim",
+      "version": "'stable'"
     },
     "neogit": {
       "rev": "d8bf9102692250193b855acd9025a826f1af2729",

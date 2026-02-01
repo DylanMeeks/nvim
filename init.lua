@@ -101,7 +101,7 @@ vim.pack.add({
     { src = "https://github.com/stevearc/oil.nvim" },
 
     -- LSP and formatting
-    { src = "https://github.com/mason-org/mason.nvim" },
+    { src = "https://github.com/mason-org/mason.nvim", version = "stable" },
     { src = "https://github.com/stevearc/conform.nvim" },
 
     -- Color theme
