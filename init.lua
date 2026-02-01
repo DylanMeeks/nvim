@@ -87,6 +87,7 @@ vim.pack.add({
     -- Misc
     -- { src = "https://github.com/uhs-robert/sshfs.nvim" }, -- cool fs mount over ssh
     -- { src = "https://github.com/meznaric/key-analyzer.nvim.git" }, -- show what keys are used
+	{ src = "https://github.com/ThePrimeagen/vim-be-good.git" },
 
     -- Snippets
     { src = "https://github.com/L3MON4D3/LuaSnip" },
