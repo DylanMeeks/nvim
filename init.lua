@@ -1,4 +1,4 @@
-vim.cmd([[set mouse=]])          -- mouse is for the weak
+vim.cmd([[set mouse=]]) -- mouse is for the weak
 
 vim.opt.guicursor = "a:blinkon0" -- no blink
 vim.opt.winborder = "single"
@@ -7,12 +7,12 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 
-vim.opt.tabstop = 4        -- A TAB character looks like 4 spaces
-vim.opt.expandtab = true   -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.opt.softtabstop = 4    -- Number of spaces inserted instead of a TAB character
-vim.opt.shiftwidth = 4     -- Number of spaces inserted when indenting
+vim.opt.tabstop = 4 -- A TAB character looks like 4 spaces
+vim.opt.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
+vim.opt.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
+vim.opt.shiftwidth = 4 -- Number of spaces inserted when indenting
 vim.opt.smartindent = true -- syntax aware indentations for newline inserts
-vim.opt.list = true        -- Shows > and - for tabs and trailing spaces
+vim.opt.list = true -- Shows > and - for tabs and trailing spaces
 
 vim.opt.wrap = false
 
@@ -34,9 +34,9 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.cursorline = true   -- Horizontal cursor line
+vim.opt.cursorline = true -- Horizontal cursor line
 vim.opt.cursorcolumn = true -- Vertical cursor line
-vim.o.colorcolumn = "80"    -- Vertical line at 80 col
+vim.o.colorcolumn = "80" -- Vertical line at 80 col
 
 vim.o.complete = ".,o,w,b,u,t"
 vim.o.completeopt = "fuzzy,menuone,noinsert,popup"
@@ -87,7 +87,7 @@ vim.pack.add({
     -- Misc
     -- { src = "https://github.com/uhs-robert/sshfs.nvim" }, -- cool fs mount over ssh
     -- { src = "https://github.com/meznaric/key-analyzer.nvim.git" }, -- show what keys are used
-	{ src = "https://github.com/ThePrimeagen/vim-be-good.git" },
+    { src = "https://github.com/ThePrimeagen/vim-be-good.git" },
 
     -- Snippets
     { src = "https://github.com/L3MON4D3/LuaSnip" },
@@ -97,12 +97,12 @@ vim.pack.add({
     -- { src = "https://github.com/DylanMeeks/cling.nvim", },
 
     -- Navigation
-    { src = "https://github.com/ThePrimeagen/harpoon",            version = "harpoon2" },
+    { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
     { src = "https://github.com/stevearc/oil.nvim" },
 
     -- LSP and formatting
-    { src = "https://github.com/mason-org/mason.nvim", version = "stable" },
+    { src = "https://github.com/mason-org/mason.nvim", version = "v2.2.1" },
     { src = "https://github.com/stevearc/conform.nvim" },
 
     -- Color theme
@@ -110,8 +110,8 @@ vim.pack.add({
 
     -- General deps
     { src = "https://github.com/nvim-telescope/telescope.nvim" }, -- Dep for neogit
-    { src = "https://github.com/nvim-lua/plenary.nvim" },         -- Dep for harpoon, neogit, gitlinker
-    { src = "https://github.com/MunifTanjim/nui.nvim" },          -- Dep for hunk
+    { src = "https://github.com/nvim-lua/plenary.nvim" }, -- Dep for harpoon, neogit, gitlinker
+    { src = "https://github.com/MunifTanjim/nui.nvim" }, -- Dep for hunk
 
     -- VCS
     { src = "https://github.com/sindrets/diffview.nvim" }, -- Dep for neogit (optional)
@@ -267,7 +267,11 @@ require("cling").setup({
             keymaps = function(buf)
                 vim.keymap.set("n", "<C-q>", function()
                     populate_quickfix(buf)
-                end, { buffer = buf, silent = true, desc = "JJ: Move diffs to quickfix" })
+                end, {
+                    buffer = buf,
+                    silent = true,
+                    desc = "JJ: Move diffs to quickfix",
+                })
             end,
         },
     },
@@ -282,12 +286,13 @@ require("mason").setup({})
 
 require("conform").setup({
     format_on_save = nil,
+    lsp_format = { "fallback" },
     formatters_by_ft = {
         c = { "clang-format", lsp_format = "fallback" },
         cpp = { "clang-format", lsp_format = "fallback" },
-        lua = { "stylua", "emmylua_ls", lsp_format = "fallback" },
         python = { "black", lsp_format = "fallback" },
         rust = { "rustfmt", lsp_format = "fallback" },
+        -- lua = { "stylua", lsp_format = "fallback" },
         verilog = { "verible", lsp_format = "fallback" },
     },
 })
@@ -340,7 +345,9 @@ vim.keymap.set("n", "<leader>ll", function()
         })
     else
         -- vim.diagnostic.config({ virtual_text = lsp_visuals_enabled })
-        vim.diagnostic.config({ virtual_lines = lsp_visuals_enabled })
+        vim.diagnostic.config({
+            virtual_lines = lsp_visuals_enabled,
+        })
     end
     lsp_visuals_enabled = not lsp_visuals_enabled
 end, { desc = "Toggle Lsp diagnostics being shown" })
@@ -474,7 +481,9 @@ vim.keymap.set("n", "<leader>fm", builtin.man_pages, { desc = "Telescope man pag
 -- -----------------------------------------------------
 -- https://ejmastnak.com/tutorials/vim-latex/luasnip/
 require("luasnip").setup({ enable_autosnippets = true })
-require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
+require("luasnip.loaders.from_lua").load({
+    paths = vim.fn.stdpath("config") .. "/snippets",
+})
 local ls = require("luasnip")
 vim.keymap.set({ "i", "s" }, "<C-e>", function()
     ls.expand_or_jump(1)
