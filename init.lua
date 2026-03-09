@@ -119,6 +119,8 @@ vim.pack.add({
     { src = "https://github.com/NeogitOrg/neogit" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/julienvincent/hunk.nvim" },
+
+	{ src = "https://github.com/barrettruth/preview.nvim" }, -- preview for typst, latex, etc.
 })
 
 local update_plugins = function()
@@ -164,6 +166,15 @@ vim.api.nvim_create_user_command(
     pack_clean,
     { desc = "Clean plugins installed using built-in package manager" }
 )
+
+-- -----------------------------------------------------
+-- Previewer for Typst and Latex
+-- -----------------------------------------------------
+vim.g.preview = {
+	-- typst = { open = { "sioyek", "--new-instance" } },
+	typst = true,
+	latex = true,
+}
 
 -- -----------------------------------------------------
 -- KeyAnalyzer to show keymaps

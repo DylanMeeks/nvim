@@ -63,6 +63,10 @@
       "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
+    "preview.nvim": {
+      "rev": "d1fd2b2a730518cee3906e37b7e1eda8052f867a",
+      "src": "https://github.com/barrettruth/preview.nvim"
+    },
     "telescope.nvim": {
       "rev": "ad7d9580338354ccc136e5b8f0aa4f880434dcdc",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
