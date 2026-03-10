@@ -67,7 +67,7 @@ vim.keymap.set("t", "", "") -- don't move cursor when <C-o> is done
 -- Plugin manager
 -- -----------------------------------------------------
 vim.api.nvim_create_autocmd({ "PackChanged" }, {
-    callback = function(ev)
+    callback = function (ev)
         local data = ev.data
         local plugin_name = data.spec.name
         local plugin_path = data.path
@@ -123,7 +123,7 @@ vim.pack.add({
     { src = "https://github.com/barrettruth/preview.nvim" }, -- preview for typst, latex, etc.
 })
 
-local update_plugins = function()
+local update_plugins = function ()
     local installed = vim.pack.get()
     local names = {}
     for _, v in ipairs(installed) do
@@ -137,7 +137,7 @@ vim.api.nvim_create_user_command(
     { desc = "Update plugins installed using built-in package manager" }
 )
 
-local pack_clean = function()
+local pack_clean = function ()
     local active_plugins = {}
     local unused_plugins = {}
 
@@ -185,15 +185,17 @@ vim.g.preview = {
 -- Git and jj
 -- -----------------------------------------------------
 vim.api.nvim_create_user_command("DiffEditor",
-    function()
-        require("hunk").setup()
-    end, {})
+                                 function ()
+                                     require("hunk").setup()
+                                 end, {})
 require("gitsigns").setup()
 require("gitlinker").setup()
 require("neogit").setup({})
-vim.keymap.set("n", "<leader>gs", function()
-    require("neogit").open()
-end, { silent = true, desc = "Neogit" })
+vim.keymap.set("n", "<leader>gs",
+               function ()
+                   require("neogit").open()
+               end,
+               { silent = true, desc = "Neogit" })
 
 -- -----------------------------------------------------
 -- Cling setup and JJ setup
@@ -276,14 +278,12 @@ require("cling").setup({
             binary = "jj",
             command = "JJ",
             completion_cmd = "jj util completion bash",
-            keymaps = function(buf)
-                vim.keymap.set("n", "<C-q>", function()
-                    populate_quickfix(buf)
-                end, {
-                    buffer = buf,
-                    silent = true,
-                    desc = "JJ: Move diffs to quickfix",
-                })
+            keymaps = function (buf)
+                vim.keymap.set("n", "<C-q>",
+                               function ()
+                                   populate_quickfix(buf)
+                               end,
+                               { buffer = buf, silent = true, desc = "JJ: Move diffs to quickfix" })
             end,
         },
     },
@@ -308,15 +308,17 @@ require("conform").setup({
         verilog = { "verible", lsp_format = "fallback" },
     },
 })
-vim.keymap.set("n", "<leader>bf", function()
-    require("conform").format()
-end, { desc = "Format using Conform" })
+vim.keymap.set("n", "<leader>bf",
+               function ()
+                   require("conform").format()
+               end,
+               { desc = "Format using Conform" })
 
 vim.lsp.enable({
     "autotools_ls",
     "clangd",
     "emmylua_ls",
-    "lua_ls",
+    -- "lua_ls",
     -- "marksman", -- musl support problems
     "ruff",
     "ty",
@@ -342,27 +344,29 @@ vim.diagnostic.config({
 })
 
 local lsp_visuals_enabled = false
-vim.keymap.set("n", "<leader>ll", function()
-    if not lsp_visuals_enabled then
-        vim.diagnostic.config({
-            underline = false,
-            virtual_text = false,
-            virtual_lines = false,
-            signs = false,
-            float = false,
-            status = false,
-            update_in_insert = false,
-            severity_sort = false,
-            jump = false,
-        })
-    else
-        -- vim.diagnostic.config({ virtual_text = lsp_visuals_enabled })
-        vim.diagnostic.config({
-            virtual_lines = lsp_visuals_enabled,
-        })
-    end
-    lsp_visuals_enabled = not lsp_visuals_enabled
-end, { desc = "Toggle Lsp diagnostics being shown" })
+vim.keymap.set("n", "<leader>ll",
+               function ()
+                   if not lsp_visuals_enabled then
+                       vim.diagnostic.config({
+                           underline = false,
+                           virtual_text = false,
+                           virtual_lines = false,
+                           signs = false,
+                           float = false,
+                           status = false,
+                           update_in_insert = false,
+                           severity_sort = false,
+                           jump = false,
+                       })
+                   else
+                       -- vim.diagnostic.config({ virtual_text = lsp_visuals_enabled })
+                       vim.diagnostic.config({
+                           virtual_lines = lsp_visuals_enabled,
+                       })
+                   end
+                   lsp_visuals_enabled = not lsp_visuals_enabled
+               end,
+               { desc = "Toggle Lsp diagnostics being shown" })
 
 -- -----------------------------------------------------
 -- Treesitter
@@ -386,7 +390,7 @@ vim.treesitter.language.register("hledger", { "journal", "j", "hledger", "ledger
 
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("treesitter.setup", {}),
-    callback = function(args)
+    callback = function (args)
         local buf = args.buf
         local filetype = args.match
 
@@ -429,16 +433,25 @@ vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>", { desc = "Open Oil file explor
 
 local harpoon = require("harpoon")
 harpoon:setup()
-vim.keymap.set("n", "<leader>a", function()
-    harpoon:list():add()
-end, { desc = "Add to harpoon" })
-vim.keymap.set("n", "<leader>e", function()
-    harpoon.ui:toggle_quick_menu(harpoon:list())
-end, { desc = "Toogle harpoon" })
-for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
-    vim.keymap.set("n", string.format("<leader>%d", idx), function()
-        harpoon:list():select(idx)
-    end, { desc = "Open ith member of Harpoon list" })
+
+vim.keymap.set("n", "<leader>a",
+               function ()
+                   harpoon:list():add()
+               end,
+               { desc = "Add to harpoon" })
+
+vim.keymap.set("n", "<leader>e",
+               function ()
+                   harpoon.ui:toggle_quick_menu(harpoon:list())
+               end,
+               { desc = "Toogle harpoon" })
+
+for _, idx in ipairs({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }) do
+    vim.keymap.set("n", string.format("<leader>%d", idx),
+                   function ()
+                       harpoon:list():select(idx)
+                   end,
+                   { desc = "Open ith member of Harpoon list" })
 end
 local harpoon_extensions = require("harpoon.extensions")
 harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
@@ -497,15 +510,18 @@ require("luasnip.loaders.from_lua").load({
     paths = vim.fn.stdpath("config") .. "/snippets",
 })
 local ls = require("luasnip")
-vim.keymap.set({ "i", "s" }, "<C-e>", function()
-    ls.expand_or_jump(1)
-end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-J>", function()
-    ls.jump(1)
-end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-K>", function()
-    ls.jump(-1)
-end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-e>", function ()
+                   ls.expand_or_jump(1)
+               end,
+               { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-J>", function ()
+                   ls.jump(1)
+               end,
+               { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-K>", function ()
+                   ls.jump(-1)
+               end,
+               { silent = true })
 
 -- -----------------------------------------------------
 -- Statusline
@@ -520,7 +536,7 @@ local function lsp_status()
         return ""
     end
     local names = vim.iter(attached_clients)
-        :map(function(client)
+        :map(function (client)
             local name = client.name:gsub("language.server", "ls")
             return name
         end)
@@ -530,13 +546,13 @@ end
 
 function _G.statusline()
     return table.concat({
-        "%f",
-        "%h%w%m%r",
-        "%=",
-        lsp_status(),
-        " %-14(%l,%c%V%)",
-        "%P",
-    }, " ")
+                            "%f",
+                            "%h%w%m%r",
+                            "%=",
+                            lsp_status(),
+                            " %-14(%l,%c%V%)",
+                            "%P",
+                        }, " ")
 end
 
 vim.o.statusline = "%{%v:lua._G.statusline()%}"
