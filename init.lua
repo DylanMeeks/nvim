@@ -1,4 +1,4 @@
-vim.cmd([[set mouse=]]) -- mouse is for the weak
+vim.cmd([[set mouse=]])          -- mouse is for the weak
 
 vim.opt.guicursor = "a:blinkon0" -- no blink
 vim.opt.winborder = "single"
@@ -7,12 +7,12 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 
-vim.opt.tabstop = 4 -- A TAB character looks like 4 spaces
-vim.opt.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.opt.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
-vim.opt.shiftwidth = 4 -- Number of spaces inserted when indenting
+vim.opt.tabstop = 4        -- A TAB character looks like 4 spaces
+vim.opt.expandtab = true   -- Pressing the TAB key will insert spaces instead of a TAB character
+vim.opt.softtabstop = 4    -- Number of spaces inserted instead of a TAB character
+vim.opt.shiftwidth = 4     -- Number of spaces inserted when indenting
 vim.opt.smartindent = true -- syntax aware indentations for newline inserts
-vim.opt.list = true -- Shows > and - for tabs and trailing spaces
+vim.opt.list = true        -- Shows > and - for tabs and trailing spaces
 
 vim.opt.wrap = false
 
@@ -34,9 +34,9 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.cursorline = true -- Horizontal cursor line
+vim.opt.cursorline = true   -- Horizontal cursor line
 vim.opt.cursorcolumn = true -- Vertical cursor line
-vim.o.colorcolumn = "80" -- Vertical line at 80 col
+vim.o.colorcolumn = "80"    -- Vertical line at 80 col
 
 vim.o.complete = ".,o,w,b,u,t"
 vim.o.completeopt = "fuzzy,menuone,noinsert,popup"
@@ -87,7 +87,7 @@ vim.pack.add({
     -- Misc
     -- { src = "https://github.com/uhs-robert/sshfs.nvim" }, -- cool fs mount over ssh
     -- { src = "https://github.com/meznaric/key-analyzer.nvim.git" }, -- show what keys are used
-    { src = "https://github.com/ThePrimeagen/vim-be-good.git" },
+    -- { src = "https://github.com/ThePrimeagen/vim-be-good.git" }, -- fun learning game
 
     -- Snippets
     { src = "https://github.com/L3MON4D3/LuaSnip" },
@@ -97,12 +97,12 @@ vim.pack.add({
     -- { src = "https://github.com/DylanMeeks/cling.nvim", },
 
     -- Navigation
-    { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
+    { src = "https://github.com/ThePrimeagen/harpoon",            version = "harpoon2" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
     { src = "https://github.com/stevearc/oil.nvim" },
 
     -- LSP and formatting
-    { src = "https://github.com/mason-org/mason.nvim", version = "v2.2.1" },
+    { src = "https://github.com/mason-org/mason.nvim",            version = "v2.2.1" },
     { src = "https://github.com/stevearc/conform.nvim" },
 
     -- Color theme
@@ -110,8 +110,8 @@ vim.pack.add({
 
     -- General deps
     { src = "https://github.com/nvim-telescope/telescope.nvim" }, -- Dep for neogit
-    { src = "https://github.com/nvim-lua/plenary.nvim" }, -- Dep for harpoon, neogit, gitlinker
-    { src = "https://github.com/MunifTanjim/nui.nvim" }, -- Dep for hunk
+    { src = "https://github.com/nvim-lua/plenary.nvim" },         -- Dep for harpoon, neogit, gitlinker
+    { src = "https://github.com/MunifTanjim/nui.nvim" },          -- Dep for hunk
 
     -- VCS
     { src = "https://github.com/sindrets/diffview.nvim" }, -- Dep for neogit (optional)
@@ -120,7 +120,7 @@ vim.pack.add({
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/julienvincent/hunk.nvim" },
 
-	{ src = "https://github.com/barrettruth/preview.nvim" }, -- preview for typst, latex, etc.
+    { src = "https://github.com/barrettruth/preview.nvim" }, -- preview for typst, latex, etc.
 })
 
 local update_plugins = function()
@@ -171,9 +171,9 @@ vim.api.nvim_create_user_command(
 -- Previewer for Typst and Latex
 -- -----------------------------------------------------
 vim.g.preview = {
-	-- typst = { open = { "sioyek", "--new-instance" } },
-	typst = true,
-	latex = true,
+    -- typst = { open = { "sioyek", "--new-instance" } },
+    typst = true,
+    latex = true,
 }
 
 -- -----------------------------------------------------
@@ -184,9 +184,10 @@ vim.g.preview = {
 -- -----------------------------------------------------
 -- Git and jj
 -- -----------------------------------------------------
-vim.api.nvim_create_user_command("DiffEditor", function()
-    require("hunk").setup()
-end, {})
+vim.api.nvim_create_user_command("DiffEditor",
+    function()
+        require("hunk").setup()
+    end, {})
 require("gitsigns").setup()
 require("gitlinker").setup()
 require("neogit").setup({})
@@ -195,7 +196,7 @@ vim.keymap.set("n", "<leader>gs", function()
 end, { silent = true, desc = "Neogit" })
 
 -- -----------------------------------------------------
--- Cling setupd and JJ setup
+-- Cling setup and JJ setup
 -- -----------------------------------------------------
 local function strip_ansi(str)
     return str:gsub("\27%[[0-9;]*m", "")
@@ -303,7 +304,7 @@ require("conform").setup({
         cpp = { "clang-format", lsp_format = "fallback" },
         python = { "black", lsp_format = "fallback" },
         rust = { "rustfmt", lsp_format = "fallback" },
-        -- lua = { "stylua", lsp_format = "fallback" },
+        lua = { lsp_format = "first" },
         verilog = { "verible", lsp_format = "fallback" },
     },
 })
