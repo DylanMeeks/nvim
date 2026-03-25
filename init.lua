@@ -115,12 +115,16 @@ vim.pack.add({
 
     -- VCS
     { src = "https://github.com/sindrets/diffview.nvim" }, -- Dep for neogit (optional)
-    { src = "https://github.com/ruifm/gitlinker.nvim" },
+    -- { src = "https://github.com/ruifm/gitlinker.nvim" },
     { src = "https://github.com/NeogitOrg/neogit" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/julienvincent/hunk.nvim" },
 
-    { src = "https://github.com/barrettruth/preview.nvim" }, -- preview for typst, latex, etc.
+    -- undo tree
+    { src = "https://github.com/mbbill/undotree.git" },
+
+    -- preview for typst, latex, etc.
+    { src = "https://github.com/barrettruth/preview.nvim" },
 })
 
 local update_plugins = function ()
@@ -168,6 +172,12 @@ vim.api.nvim_create_user_command(
 )
 
 -- -----------------------------------------------------
+-- Undotree
+-- -----------------------------------------------------
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle,
+               { silent = true, desc = "Undotree" })
+
+-- -----------------------------------------------------
 -- Previewer for Typst and Latex
 -- -----------------------------------------------------
 vim.g.preview = {
@@ -189,7 +199,7 @@ vim.api.nvim_create_user_command("DiffEditor",
                                      require("hunk").setup()
                                  end, {})
 require("gitsigns").setup()
-require("gitlinker").setup()
+-- require("gitlinker").setup()
 require("neogit").setup({})
 vim.keymap.set("n", "<leader>gs",
                function ()
