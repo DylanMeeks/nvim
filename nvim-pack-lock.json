@@ -16,12 +16,8 @@
       "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
       "src": "https://github.com/sindrets/diffview.nvim"
     },
-    "gitlinker.nvim": {
-      "rev": "cc59f732f3d043b626c8702cb725c82e54d35c25",
-      "src": "https://github.com/ruifm/gitlinker.nvim"
-    },
     "gitsigns.nvim": {
-      "rev": "0a80125bace82d82847d40bc2c38a22d62c6dc2d",
+      "rev": "e1fb5425c8812214209b3f24eaa582c6c552cf98",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "gruber-darker.nvim": {
@@ -37,17 +33,13 @@
       "rev": "a73c34934e87af4f2e615fea3a57ee28b2dceec8",
       "src": "https://github.com/julienvincent/hunk.nvim"
     },
-    "key-analyzer.nvim": {
-      "rev": "4e4bef34498e821bcbd5203f44db8b67e4f10e04",
-      "src": "https://github.com/meznaric/key-analyzer.nvim.git"
-    },
     "mason.nvim": {
       "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
       "src": "https://github.com/mason-org/mason.nvim",
       "version": "'v2.2.1'"
     },
     "neogit": {
-      "rev": "64b1a01a9fc3d3ee8b2368230563bedf3eb66e54",
+      "rev": "5a7fca171e3ad07380745d573d791e95268b8f3f",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nui.nvim": {
@@ -55,7 +47,7 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-treesitter": {
-      "rev": "6620ae1c44dfa8623b22d0cbf873a9e8d073b849",
+      "rev": "539abf6da5ee8702e37b82cc953131dadd570da2",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -72,12 +64,8 @@
       "src": "https://github.com/barrettruth/preview.nvim"
     },
     "telescope.nvim": {
-      "rev": "5255aa27c422de944791318024167ad5d40aad20",
+      "rev": "cfb85dcf7f822b79224e9e6aef9e8c794211b20b",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
-    },
-    "undotree": {
-      "rev": "6fa6b57cda8459e1e4b2ca34df702f55242f4e4d",
-      "src": "https://github.com/mbbill/undotree.git"
     }
   }
 }
