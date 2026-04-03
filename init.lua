@@ -120,9 +120,6 @@ vim.pack.add({
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/julienvincent/hunk.nvim" },
 
-    -- undo tree
-    { src = "https://github.com/mbbill/undotree.git" },
-
     -- preview for typst, latex, etc.
     { src = "https://github.com/barrettruth/preview.nvim" },
 })
@@ -174,7 +171,8 @@ vim.api.nvim_create_user_command(
 -- -----------------------------------------------------
 -- Undotree
 -- -----------------------------------------------------
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle,
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "<leader>u", require("undotree").open,
                { silent = true, desc = "Undotree" })
 
 -- -----------------------------------------------------
