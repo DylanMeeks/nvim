@@ -26,7 +26,7 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
-local copy = function(args)
+local copy = function (args)
     return args[1]
 end
 
@@ -108,7 +108,8 @@ return {
         c(1, {
             sn(
                 nil,
-                { i(1, "k"), t(", "), i(2, "v"), t(" in "), c(3, { t("pairs"), t("ipairs") }), t("("), i(4), t(")") }
+                { i(1, "k"), t(", "), i(2, "v"), t(" in "),
+                    c(3, { t("pairs"), t("ipairs") }), t("("), i(4), t(")") }
             ),
             sn(nil, { i(1, "i"), t(" = "), i(2), t(", "), i(3) }),
         }),
